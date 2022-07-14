@@ -1,0 +1,34 @@
+@import url('https://fonts.googleapis.com/css2?family=Voltaire&display=swap');
+
+:root {
+    --background: #97aab3;
+    --fontColor: #c8e4ec;
+    --border: #86b4de;
+    --shadow: #e9f4f3;
+    --font: 'Voltaire';
+}
+
+header {
+    background-color: var(--background);
+    color: var(--fontColor);
+    border-bottom: solid 10px var(--border);
+    text-align: center;
+    font-size: 35px;
+    font-family: var(--font);
+}
+
+header:hover {
+    border-bottom: solid 10px var(--shadow);
+}
+
+body {
+    background-color: var(--background);
+}
+
+.textInput {
+    margin: 10px;
+}
+
+.btnInput {
+    padding-left: 5px;
+}
