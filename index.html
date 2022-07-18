@@ -7,9 +7,9 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" type="text/css" href="./assets/css/style.css" />
   </head>
-  <body>
+  <body class="bg-slate-400">
     <main>
-      <header><h1>Food Tinder</h1></header>
+      <header class="border-b-4 border-b-solid border-b-blue-200 mb-5"><h1 class="text-center text-xl font-serif font-bold text-white p-3">Food Tinder</h1></header>
       <section id="cards">
         <div class="flex items-center text-center justify-center">
           <div
@@ -29,10 +29,10 @@
           </div>
         </div>
       </section>
-      <section id="control">
-        <button>Options</button>
-        <button>Find a Restaurant</button>
-        <button>Recipes</button>
+      <section id="control" class="flex items-center text-center justify-center mt-5">
+        <button class="mr-2 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow animate-bounce">Options</button>
+        <button class="mr-2 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow animate-bounce">Find a Restaurant</button>
+        <button class="mr-2 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow animate-bounce">Recipes</button>
       </section>
     </main>
     <!-- <script src="./assets/js/script.js" type="module"></script> -->
