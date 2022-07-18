@@ -4,42 +4,37 @@
     <title>Food Tinder</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" type="text/css" href="./assets/css/style.css" />
   </head>
-
-  <main>
-    <div id="foodContainer">
-      <section id="mealTypes"><h2>Meal Types</h2></section>
-      <section id="dishTypes"><h2>Dish Types</h2></section>
-      <section id="cuisineTypes"><h2>Cuisine Types</h2></section>
-      <section>
-        <h2>Ingredients</h2>
-        <form id="ingredientsForm">
-          <input type="text" placeholder="Ingredient..." />
-          <button>Add</button>
-        </form>
-        <div id="ingredientsList"></div>
+  <body>
+    <main>
+      <header><h1>Food Tinder</h1></header>
+      <section id="cards">
+        <div class="flex items-center text-center justify-center">
+          <div
+            class="rounded-3xl border-4 border-solid border-blue-200 bg-slate-400 w-96 h-3/5 overflow-hidden"
+          >
+            <img src="https://source.unsplash.com/random" alt="placeholder" />
+            <button
+              class="mt-2 mb-2 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
+            >
+              Accept
+            </button>
+            <button
+              class="mt-2 mb-2 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
+            >
+              Reject
+            </button>
+          </div>
+        </div>
       </section>
-      <section>
-        <h2>Find Some Recipes!</h2>
-        <button id="search">Search</button>
+      <section id="control">
+        <button>Options</button>
+        <button>Find a Restaurant</button>
+        <button>Recipes</button>
       </section>
-      <section id="recipeResults"><h2>Results</h2></section>
-    </div>
-  </main>
-
-  <!--
-<section>
-  <div id="restaurantContainer">
-    <form id="restaurantForm">
-      <input type="text" placeholder="please input your postcode">
-      <button name="search">search</button>
-    </form>
-    <div id="restaurantResult">
-
-    </div>
-  </div>
-</section>
--->
-  <script src="./assets/js/script.js" type="module"></script>
+    </main>
+    <!-- <script src="./assets/js/script.js" type="module"></script> -->
+  </body>
 </html>
