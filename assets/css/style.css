@@ -1,0 +1,108 @@
+* {
+  margin: 0;
+}
+
+body {
+  font-family: sans-serif;
+}
+/*
+all the following is for the swipe function 
+*/
+
+#foodResult {
+  --n: 1;
+  display: flex;
+  align-items: center;
+  overflow-y: hidden;
+  width: 100%;
+  width: calc(var(--n) * 100%);
+  height: 50vw;
+  max-height: 100vh;
+  transform: translate(calc(var(--tx, 0px) + var(--i, 0) / var(--n) * -100%));
+}
+
+/*
+by giving this property to .item, i cant click the link inside the div
+if not, the style is not looking good...
+*/
+
+.item {
+  width: 100%;
+  width: calc(100% / var(--n));
+  user-select: none;
+  pointer-events: none;
+}
+
+.smooth {
+  transition: transform calc(var(--f, 1) * 0.5s) ease-out;
+}
+
+button {
+  text-transform: capitalize;
+  background-color: hsl(266, 55%, 60%);
+  border: none;
+  padding: 0.4rem 1rem;
+  margin: 0.4rem 0.5rem;
+  color: white;
+  transition: 200ms;
+  font-size: 1rem;
+  border-radius: 5px;
+}
+
+section {
+  width: min(90vw, 500px);
+  margin: 1rem auto;
+  padding: 1.5rem;
+  border: solid 1px rgba(0, 0, 0, 0.125);
+  border-radius: 1rem;
+  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.081);
+}
+
+section button {
+  opacity: 0.7;
+}
+
+section:nth-of-type(2) button {
+  background-color: rgb(91, 175, 6);
+}
+
+section:nth-of-type(3) button {
+  background-color: rgb(32, 74, 214);
+}
+button[data-active="true"] {
+  opacity: 1;
+}
+section h2 {
+  margin-bottom: 1rem;
+}
+
+.delete {
+  background-color: red;
+}
+
+input {
+  padding: 0.3rem;
+  font-size: 1rem;
+  border: solid 1px rgb(114, 33, 181);
+  border-radius: 5px;
+  outline: none;
+}
+ul {
+  margin-block-start: 0;
+  padding-inline-start: 0;
+}
+li {
+  display: flex;
+  width: 100%;
+  margin-bottom: 0.3rem;
+  justify-content: space-between;
+  background-color: rgba(98, 170, 243, 0.118);
+  padding: 0.3rem 1rem;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+li p {
+  align-self: center;
+  justify-self: left;
+}
