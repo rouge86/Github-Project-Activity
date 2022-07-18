@@ -1,36 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <title>Food Tinder</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" type="text/css" href="style.css" />
-</head>
+    <link rel="stylesheet" type="text/css" href="./assets/css/style.css" />
+  </head>
 
-<section>
-  <div id="foodContainer">
-    <div id="btnList">
-      <button id="breakfast">Breakfast</button>
-      <button id="brunch">Brunch</button>
-      <button id="l-d">Lunch/Dinner</button>
-      <button id="snack">Snacks</button>
-      <button id="teatime">Teatime</button>
+  <main>
+    <div id="foodContainer">
+      <section id="mealTypes"><h2>Meal Types</h2></section>
+      <section id="dishTypes"><h2>Dish Types</h2></section>
+      <section id="cuisineTypes"><h2>Cuisine Types</h2></section>
+      <section>
+        <h2>Ingredients</h2>
+        <form id="foodForm">
+          <input type="text" placeholder="input the ingredients you like" />
+          <button name="search">Add</button>
+        </form>
+        <div id="ingredientList"></div>
+      </section>
+      <div id="foodResult"></div>
     </div>
+  </main>
 
-    <!--
-    <form id="foodForm">
-      <input type="text" placeholder="input the ingredients you like">
-      <button name="search">search</button>
-    </form>
-    -->
-
-    <div id="foodResult">
-    </div>
-  </div>
-</section>
-
-<!--
+  <!--
 <section>
   <div id="restaurantContainer">
     <form id="restaurantForm">
@@ -42,7 +36,6 @@
     </div>
   </div>
 </section>
--->  
-
-<script src="script.js"></script>
+-->
+  <script src="./assets/js/script.js" type="module"></script>
 </html>
