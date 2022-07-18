@@ -1,70 +1,339 @@
 const recipesContainer = document.getElementById("recipes-container");
-const getRecipesBtn = document.getElementById("get-recipes"); // as HTMLButtonElement;
-const queryInput = document.getElementById("query-input"); // as HTMLInputElement;
-const mealTypeButtons = document.getElementById("meal-type"); // as HTMLSectionElement
 
-const apiId = "bcfab256";
-const apiKey = "f61e0b4ed3f4b5d198cb292a5bf83160";
+function renderRecipes(recipes) {
+  recipesContainer.innerHTML = "";
+  recipes.forEach(recipe => {
+    const div = document.createElement("div");
+    const header = document.createElement("h2");
+    header.innerText = recipe.label;
+    div.appendChild(header);
+    recipesContainer.appendChild(div);
+    // hit.recipe.label;
+    const img = document.createElement("img");
+    img.src = recipe.images.REGULAR.url;
+    div.appendChild(img);
+    const ul = document.createElement("ul");
+    recipe.ingredientLines.forEach(line => {
+      const li = document.createElement("li");
+      li.innerText = line;
+      ul.appendChild(li);
+    });
+    div.appendChild(ul);
 
-let options = {}; // as QueryOptions;
-
-mealTypeButtons.addEventListener("click", e => {
-  if (!e.target.matches("button")) return;
-  const { mealtype } = e.target.dataset;
-  appendMealType(mealtype);
-});
-
-const url = new URL("api/recipes/v2", "https://api.edamam.com");
-url.searchParams.append("app_id", apiId);
-url.searchParams.append("app_key", apiKey);
-url.searchParams.append("type", "public");
-
-// interface QueryOptions {
-//   mealType?: string;
-// }
-
-getRecipesBtn.addEventListener("click", e => {
-  const query = queryInput.value;
-  fetchData(query);
-});
-
-// interface Ingredient {
-//   text: string;
-//   quantity: number;
-//   measure: string;
-//   food: string;
-//   foodCategory: string;
-// }
-
-// interface Recipe {
-//   label: string;
-//   ingredients: Ingredient[];
-// }
-
-// interface Data {
-//   hits: Recipe[];
-// }
-
-async function fetchData(query) {
-  url.searchParams.append("q", query);
-  appendOptions(url, options);
-  const request = new Request(url);
-  console.log(request);
-  // const response = await fetch(request);
-  // if (!response.ok) return;
-  // const data = await response.json();
-  // console.log(data);
-}
-
-// function renderRecipes(data) {}
-
-function appendOptions(url, options) {
-  Object.entries(options).forEach(([key, val]) => {
-    url.searchParams.append(key, val);
+    const serves = document.createElement("h3");
+    serves.innerText = "Serves " + recipe.yield;
+    const serveSize = document.createElement("h3");
+    serveSize.innerText = (recipe.totalWeight / recipe.yield).toFixed(0) + "g per serve";
+    div.appendChild(serves);
+    div.appendChild(serveSize);
+    const link = document.createElement("a");
+    link.href = recipe.url;
+    link.innerText = "Go to recipe";
+    link.target = "_blank";
+    div.appendChild(link);
   });
-  // url.searchParams.append();
 }
 
-function appendMealType(mealType) {
-  options.mealType = mealType;
+class RecipeQuery {
+  #apiId = "bcfab256";
+  #apiKey = "f61e0b4ed3f4b5d198cb292a5bf83160";
+  #apiOrigin = "https://api.edamam.com";
+  #ingredients;
+  #health;
+  #mealTypes;
+  #cuisineTypes;
+  #dishTypes;
+  constructor() {
+    this.#health = [];
+    this.#ingredients = [];
+    this.#mealTypes = [];
+    this.#cuisineTypes = [];
+    this.#dishTypes = [];
+  }
+
+  static mealTypes = {
+    breakfast: "breakfast",
+    brunch: "brunch",
+    lunch: "lunch",
+    dinner: "dinner",
+    snack: "snack",
+    teatime: "teatime",
+  };
+  static cuisineTypes = {
+    american: "american",
+    asian: "asian",
+    british: "british",
+    caribbean: "caribbean",
+    centralEurope: "central europe",
+    chinese: "chinese",
+    easternEurpoe: "eastern europe",
+    french: "french",
+    greek: "greek",
+    indian: "indian",
+    italian: "italian",
+    japanese: "japanese",
+    korean: "korean",
+    kosher: "kosher",
+    mediterranean: "mediterranean",
+    mexican: "mexican",
+    middleEastern: "middle eastern",
+    nordic: "nordic",
+    southAmerican: "south american",
+    southEastAsian: "south east asian",
+    world: "world",
+  };
+  static dishTypes = {
+    alcoholCocktail: "alcohol cocktail",
+    cookies: "biscuits and cookies",
+    bread: "bread",
+    cereals: "cereals",
+    condimentsAndSauces: "condiments and sauces",
+    desserts: "desserts",
+    drinks: "drinks",
+    egg: "egg",
+    iceCreamAndCustard: "ice cream and custard",
+    mainCourse: "main course",
+    pancake: "pancake",
+    pasta: "pasta",
+    pastry: "pastry",
+    piesAndTarts: "pies and tarts",
+    pizza: "pizza",
+    preps: "preps",
+    preserve: "preserve",
+    salad: "salad",
+    sandwihces: "sandwiches",
+    seafood: "seafood",
+    sideDish: "side dish",
+    soup: "soup",
+    specialOccasions: "special occasions",
+    starter: "starter",
+    sweets: "sweets",
+  };
+  static healthLabels = {
+    alcoholFree: "alcohol-free",
+    celeryFree: "celery-free",
+    crustaceanFree: "crustacean-free",
+    dairyFree: "dairy-free",
+    DASH: "DASH",
+    eggFree: "egg-free",
+    fishFree: "fish-free",
+    FODMAPFree: "fodmap-free",
+    glutenFree: "gluten-free",
+    immunoSupportive: "immuno-supportive",
+    ketoFriendly: "keto-friendly",
+    kidneyFriendly: "kidney-friendly",
+    kosher: "kosher",
+    lowPotassium: "low-potassium",
+    lowSugar: "low-sugar",
+    lupineFree: "lupine-free",
+    mediterranean: "Mediterranean",
+    molluskFree: "mollusk-free",
+    mustardFree: "mustard-free",
+    noOilAdded: "No-oil-added",
+    paleo: "paleo",
+    peanutFree: "peanut-free",
+    pescatarian: "pescatarian",
+  };
+
+  async getRecipes() {
+    try {
+      const data = await this.#executeQuery();
+      const recipes = data.hits.map(hit => hit.recipe);
+      return recipes;
+    } catch (error) {
+      console.warn(error);
+      return null;
+    }
+  }
+
+  async #executeQuery() {
+    const url = this.#buildUrl();
+    const request = new Request(url);
+    try {
+      const response = await fetch(request);
+      if (!response.ok) throw new Error("Invalid request, status:" + response.status);
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  #buildUrl() {
+    const url = new URL("api/recipes/v2", this.#apiOrigin);
+    url.searchParams.append("app_id", this.#apiId);
+    url.searchParams.append("app_key", this.#apiKey);
+    url.searchParams.append("type", "public");
+    url.searchParams.append("random", "true");
+    if (this.#ingredients.length > 0)
+      url.searchParams.append("q", this.#ingredients.join(" "));
+
+    this.#appendArrayUrl(url, this.#mealTypes, "mealType");
+    this.#appendArrayUrl(url, this.#health, "health");
+    this.#appendArrayUrl(url, this.#cuisineTypes, "cuisineType");
+    this.#appendArrayUrl(url, this.#dishTypes, "dishType");
+
+    return url;
+  }
+
+  #appendArrayUrl(url, arr, key) {
+    console.log(arr);
+    arr.forEach(item => {
+      url.searchParams.append(key, item);
+    });
+  }
+
+  #setType(store, items) {
+    const caseSensitive = store === this.#health;
+    const data = this.#normaliseItems(items);
+    store.length = 0;
+    data.forEach(item => {
+      const caseSensitiveItem = caseSensitive ? item : item.toLowerCase();
+      store.push(caseSensitiveItem);
+    });
+  }
+  #addType(store, items) {
+    const caseSensitive = store === this.#health;
+    const data = this.#normaliseItems(items);
+    data.forEach(item => {
+      const caseSensitiveItem = caseSensitive ? item : item.toLowerCase();
+      if (!store.some(existingItem => existingItem === caseSensitiveItem))
+        store.push(caseSensitiveItem);
+    });
+  }
+  #removeType(store, items) {
+    const data = this.#normaliseItems(items);
+    const arr = store.filter(item => !data.some(i => i.toLowerCase() === item.toLowerCase()));
+    store.length = 0;
+    arr.forEach(item => store.push(item));
+  }
+  #removeAllType(store) {
+    store.length = 0;
+  }
+
+  setIngredientTypes(...ingredientTypes) {
+    this.#setType(this.#ingredients, ingredientTypes);
+  }
+  addIngredientTypes(...ingredientTypes) {
+    this.#addType(this.#ingredients, ingredientTypes);
+  }
+  removeIngredientTypes(...ingredientTypes) {
+    this.#removeType(this.#ingredients, ingredientTypes);
+  }
+  removeAllIngredientTypes() {
+    this.#removeAllType(this.#ingredients);
+  }
+  setMealTypes(...mealTypes) {
+    this.#setType(this.#mealTypes, mealTypes);
+  }
+  addMealTypes(...mealTypes) {
+    this.#addType(this.#mealTypes, mealTypes);
+  }
+  removeMealTypes(...mealTypes) {
+    this.#removeType(this.#mealTypes, mealTypes);
+  }
+  removeAllMealTypes() {
+    this.#removeAllType(this.#mealTypes);
+  }
+  setHealthLabels(...healthLabels) {
+    this.#setType(this.#health, healthLabels);
+  }
+  addHealthLabels(...healthLabels) {
+    this.#addType(this.#health, healthLabels);
+  }
+  removeHealthLabels(...healthLabels) {
+    this.#removeType(this.#health, healthLabels);
+  }
+  removeAllHealthLabels() {
+    this.#removeAllType(this.#health);
+  }
+  setCuisineTypes(...cuisineTypes) {
+    this.#setType(this.#cuisineTypes, cuisineTypes);
+  }
+  addCuisineTypes(...cuisineTypes) {
+    this.#addType(this.#cuisineTypes, cuisineTypes);
+  }
+  removeCuisineTypes(...cuisineTypes) {
+    this.#removeType(this.#cuisineTypes, cuisineTypes);
+  }
+  removeAllCuisineTypes() {
+    this.#removeAllType(this.#cuisineTypes);
+  }
+  setDishTypes(...dishTypes) {
+    this.#setType(this.#dishTypes, dishTypes);
+  }
+  addDishTypes(...dishTypes) {
+    this.#addType(this.#dishTypes, dishTypes);
+  }
+  removeDishTypes(...dishTypes) {
+    this.#removeType(this.#dishTypes, dishTypes);
+  }
+  removeAllDishTypes() {
+    this.#removeAllType(this.#dishTypes);
+  }
+
+  // Ensure that arguments provided are in the form of a single array of strings:
+  //    (["example", "etc"])
+  // or multiple strings:
+  //    ("more examples", "hello world")
+  #normaliseItems(args) {
+    let data;
+    const type = typeof args[0];
+    if (args.some(item => typeof item !== type)) {
+      throw new Error(
+        "Please provide consistent arguments in the form of strings or an array of strings"
+      );
+    }
+    if (Array.isArray(args[0]) && args.length > 1) {
+      throw new Error("When providing an array, please only provide a single array");
+    }
+    if (!(type === "string" || Array.isArray(args[0]))) {
+      throw new Error(
+        "Please provide arguments in the form of strings or an array of strings"
+      );
+    }
+    if (Array.isArray(args[0])) {
+      if (args[0].some(item => typeof item !== "string"))
+        throw new Error("All items provided in array must be of type string");
+      data = [...args[0]];
+    } else {
+      data = [...args];
+    }
+    const arr = data.map(item => item.trim());
+    const filteredArr = arr.filter(item => item);
+    return this.#uniqueArray(filteredArr);
+  }
+  log() {
+    console.log("Ingredients:", this.#ingredients);
+    console.log("Meal Types:", this.#mealTypes);
+    console.log("Dish Types:", this.#dishTypes);
+    console.log("Cuisine Types:", this.#cuisineTypes);
+    console.log("Health Labels:", this.#health);
+    console.log(this.#buildUrl().href);
+  }
+  #uniqueArray(arr) {
+    return [...new Set(arr)];
+  }
 }
+
+async function init() {
+  // Get type definitions from RecipeQuery static properties
+  const { dishTypes, mealTypes, cuisineTypes } = RecipeQuery;
+
+  // Create a new query instance
+  const query = new RecipeQuery();
+
+  // Change whatever settings we want using any ingredients or using the type definitions
+  query.addIngredientTypes(["pepperoni", "mozzarella"]);
+  query.addDishTypes(dishTypes.pizza);
+  query.addCuisineTypes(cuisineTypes.easternEurpoe);
+  query.addDishTypes(mealTypes.dinner);
+
+  // A logging function to show the different parameters at work
+  query.log();
+
+  // Make the request and get the actual recipes
+  // renderRecipes(await query.getRecipes());
+}
+
+init();
