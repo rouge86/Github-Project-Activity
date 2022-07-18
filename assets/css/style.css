@@ -1,13 +1,10 @@
-* {
+/* * {
   margin: 0;
 }
 
 body {
   font-family: sans-serif;
 }
-/*
-all the following is for the swipe function 
-*/
 
 #foodResult {
   --n: 1;
@@ -20,11 +17,6 @@ all the following is for the swipe function
   max-height: 100vh;
   transform: translate(calc(var(--tx, 0px) + var(--i, 0) / var(--n) * -100%));
 }
-
-/*
-by giving this property to .item, i cant click the link inside the div
-if not, the style is not looking good...
-*/
 
 .item {
   width: 100%;
@@ -105,4 +97,4 @@ li {
 li p {
   align-self: center;
   justify-self: left;
-}
+} */
