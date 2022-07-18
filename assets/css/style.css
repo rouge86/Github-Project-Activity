@@ -49,10 +49,6 @@ button {
   border-radius: 5px;
 }
 
-button[data-active="true"] {
-  background-color: hsl(266, 55%, 37%);
-}
-
 section {
   width: min(90vw, 500px);
   margin: 1rem auto;
@@ -61,6 +57,52 @@ section {
   border-radius: 1rem;
   box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.081);
 }
+
+section button {
+  opacity: 0.7;
+}
+
+section:nth-of-type(2) button {
+  background-color: rgb(91, 175, 6);
+}
+
+section:nth-of-type(3) button {
+  background-color: rgb(32, 74, 214);
+}
+button[data-active="true"] {
+  opacity: 1;
+}
 section h2 {
   margin-bottom: 1rem;
+}
+
+.delete {
+  background-color: red;
+}
+
+input {
+  padding: 0.3rem;
+  font-size: 1rem;
+  border: solid 1px rgb(114, 33, 181);
+  border-radius: 5px;
+  outline: none;
+}
+ul {
+  margin-block-start: 0;
+  padding-inline-start: 0;
+}
+li {
+  display: flex;
+  width: 100%;
+  margin-bottom: 0.3rem;
+  justify-content: space-between;
+  background-color: rgba(98, 170, 243, 0.118);
+  padding: 0.3rem 1rem;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+li p {
+  align-self: center;
+  justify-self: left;
 }

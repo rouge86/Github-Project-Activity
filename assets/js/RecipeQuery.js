@@ -58,17 +58,17 @@ class RecipeQuery {
     // iceCreamAndCustard: "ice cream and custard",
     mainCourse: "main course",
     // pancake: "pancake",
-    pasta: "pasta",
-    pastry: "pastry",
-    piesAndTarts: "pies and tarts",
-    pizza: "pizza",
+    // pasta: "pasta",
+    // pastry: "pastry",
+    // piesAndTarts: "pies and tarts",
+    // pizza: "pizza",
     // preps: "preps",
     // preserve: "preserve",
-    salad: "salad",
-    sandwihces: "sandwiches",
-    seafood: "seafood",
+    // salad: "salad",
+    // sandwihces: "sandwiches",
+    // seafood: "seafood",
     // sideDish: "side dish",
-    soup: "soup",
+    // soup: "soup",
     // specialOccasions: "special occasions",
     // starter: "starter",
     // sweets: "sweets",
@@ -173,7 +173,9 @@ class RecipeQuery {
   #removeAllType(store) {
     store.length = 0;
   }
-
+  getIngredients = () => {
+    return this.#ingredients;
+  };
   setIngredientTypes = (...ingredientTypes) => {
     this.#setType(this.#ingredients, ingredientTypes);
   };

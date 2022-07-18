@@ -1,18 +1,33 @@
-//var created to access HTML
-
 import RecipeQuery from "./RecipeQuery.js";
+const searchBtn = document.getElementById("search");
 
 const mealTypes = document.getElementById("mealTypes");
 const dishTypes = document.getElementById("dishTypes");
 const cuisineTypes = document.getElementById("cuisineTypes");
-var resultFood = document.querySelector("#foodResult");
+
+const ingredientsForm = document.getElementById("ingredientsForm");
+const ingredientsList = document.getElementById("ingredientsList");
+const recipeResults = document.getElementById("recipeResults");
 
 let query = new RecipeQuery();
+query.addCuisineTypes("italian");
 
 // Event delegation
 mealTypes.addEventListener("click", setMealType);
 dishTypes.addEventListener("click", setDishType);
 cuisineTypes.addEventListener("click", setCuisineType);
+ingredientsForm.addEventListener("submit", addIngredient);
+ingredientsList.addEventListener("click", removeIngredient);
+searchBtn.addEventListener("click", onSearch);
+
+async function onSearch() {
+  const recipes = await query.getRecipes();
+  // console.log(recipes);
+  recipes.forEach(recipe => {
+    console.log(recipe.cuisineType);
+  });
+  renderResults(recipes);
+}
 
 function setMealType(e) {
   const { target: clickedButton } = e;
@@ -55,11 +70,63 @@ function toggleButton(button, onTrue, onFalse) {
   }
 }
 
-// breakfast.addEventListener("click", breakfastClick);
-// brunch.addEventListener("click", brunchClick);
-// lunchDinner.addEventListener("click", lunchDinnerClick);
-// snack.addEventListener("click", snackClick);
-// teatime.addEventListener("click", teatimeClick);
+function addIngredient(e) {
+  e.preventDefault();
+  const input = e.target.querySelector("input");
+  const ingredient = input.value.trim();
+  if (!ingredient) return;
+  query.addIngredientTypes(ingredient);
+  renderIngredients();
+  input.value = "";
+}
+
+function removeIngredient(e) {
+  const button = e.target;
+  if (!button.matches("button")) return;
+  const value = button.dataset.value;
+  query.removeIngredientTypes(value);
+  renderIngredients();
+}
+
+function renderIngredients() {
+  ingredientsList.innerHTML = "";
+  const ingredients = query.getIngredients();
+  const ul = document.createElement("ul");
+  ingredients.forEach(ingredient => ul.appendChild(renderIngredient(ingredient)));
+  ingredientsList.appendChild(ul);
+}
+
+function renderIngredient(value) {
+  const li = document.createElement("li");
+  const p = document.createElement("p");
+  p.innerText = value;
+  const button = document.createElement("button");
+  button.innerText = "x";
+  button.classList.add("delete");
+  button.dataset.value = value;
+  li.appendChild(p);
+  li.appendChild(button);
+  return li;
+}
+
+function renderResults(recipes) {
+  const html = recipes.map(
+    recipe => `
+          <div class="item">
+            <img src="${recipe.image}" alt="img">
+            <div class="flex-container">
+              <h1 class="title">${recipe.label}</h1>
+              <h2 class="title">${recipe.mealType}</h2>
+              <a class="view-btn" target="_blank" href="${recipe.url}">View Recipe</a>
+            </div>
+            <p class="item-data">Calories: ${recipe.calories.toFixed(2)}</p>
+            <p class="item-data">Diet label: ${
+              recipe.dietLabels.length > 0 ? recipe.dietLabels : "N/A"
+            }</p>
+          </div>`
+  );
+  recipeResults.innerHTML = "<h2>Results</h2>" + html.join("");
+}
 
 //this is not a effective way to load recipe in each mealType
 //was trying to do if button === click, url = newMealTypeLink but didnt work
