@@ -10,23 +10,36 @@
   </head>
   <body>
     <div class="flex flex-col h-screen bg-slate-100">
-      <main id="mainScreen" class="flex-1">
-        <header><h1>Food Tinder</h1></header>
-        <section id="cards">
-          <div class="flex items-center text-center justify-center">
-            <div
-              class="rounded-3xl border-4 border-solid border-blue-200 bg-slate-400 w-96 h-3/5 overflow-hidden"
-            >
-              <img src="https://source.unsplash.com/random" alt="placeholder" />
+      <main id="mainScreen" class="flex flex-col flex-1">
+        <header>
+          <h1 class="flex-none h-fit text-7xl font-bold text-center">Food Tinder</h1>
+        </header>
+        <section id="cards" class="relative h-full recipeCards">
+          <div
+            class="flex absolute flex-col border-gray-600 border-2 rounded-3xl w-72 h-96 overflow-hidden shadow-2xl left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+          >
+            <div class="flex-none h-2/3">
+              <img
+                class="h-full w-full object-cover select-none pointer-events-none"
+                src="https://source.unsplash.com/random"
+                alt="placeholder"
+              />
+            </div>
+            <div class="flex-1 h-1/6 text-xl font-sans p-3 overflow-hidden">
+              <h2 class="overflow-hidden overflow-ellipsis whitespace-nowrap">
+                Title, Like an obnoxiously long recipe title from one of those stupid sites
+              </h2>
+            </div>
+            <div class="flex flex-none justify-between m-3">
               <button
-                class="mt-2 mb-2 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
+                class="w-12 h-12 rounded-3xl border-solid border-2 border-rose-500 hover:bg-rose-400"
               >
-                Accept
+                ✘
               </button>
               <button
-                class="mt-2 mb-2 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
+                class="w-12 h-12 rounded-3xl border-solid border-2 border-lime-500 hover:bg-lime-400"
               >
-                Reject
+                ✔
               </button>
             </div>
           </div>
@@ -34,7 +47,7 @@
       </main>
       <main id="optionsScreen" class="flex-1" hidden>
         <section>
-          <h2>Health Options</h2>
+          <h2 class="text-4xl font-bold text-center">Health Options</h2>
           <div class="container">
             <!-- Render list items with javascript, load data from RecipeQuery.healthLables -->
           </div>
