@@ -9,40 +9,84 @@
     <link rel="stylesheet" type="text/css" href="./assets/css/style.css" />
   </head>
   <body>
-    <main>
-      <header><h1>Food Tinder</h1></header>
-      <section id="cards">
-        <div class="flex items-center text-center justify-center">
-          <div
-            class="rounded-3xl border-4 border-solid border-blue-200 bg-slate-400 w-96 h-3/5 overflow-hidden"
-          >
-            <img src="https://source.unsplash.com/random" alt="placeholder" />
-            <button
-              class="mt-2 mb-2 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
+    <div class="flex flex-col h-screen bg-slate-100">
+      <main id="mainScreen" class="flex-1">
+        <header><h1>Food Tinder</h1></header>
+        <section id="cards">
+          <div class="flex items-center text-center justify-center">
+            <div
+              class="rounded-3xl border-4 border-solid border-blue-200 bg-slate-400 w-96 h-3/5 overflow-hidden"
             >
-              Accept
-            </button>
-            <button
-              class="mt-2 mb-2 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
-            >
-              Reject
-            </button>
+              <img src="https://source.unsplash.com/random" alt="placeholder" />
+              <button
+                class="mt-2 mb-2 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
+              >
+                Accept
+              </button>
+              <button
+                class="mt-2 mb-2 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
+              >
+                Reject
+              </button>
+            </div>
           </div>
-        </div>
-      </section>
-      <section id="control">
-        <button>Options</button>
-        <button>Find a Restaurant</button>
-        <button>Recipes</button>
-      </section>
-    </main>
-    <main hidden>
-      <section id="panel"></section>
-      <section id="map"></section>
-    </main>
-    <main hidden>
-      <section></section>
-    </main>
+        </section>
+      </main>
+      <main id="optionsScreen" class="flex-1" hidden>
+        <section>
+          <h2>Health Options</h2>
+          <div class="container">
+            <!-- Render list items with javascript, load data from RecipeQuery.healthLables -->
+          </div>
+        </section>
+      </main>
+      <main id="mapScreen" class="flex-1" hidden>
+        <section id="panel"></section>
+        <section id="map"></section>
+        <input type="text" />
+        <button></button>
+      </main>
+      <main id="recipesScreen" class="flex-1" hidden>
+        <section>
+          <h2>Recipes</h2>
+          <div id="recipesContainer" class="container">
+            <!-- Render list items with javascript, load data from local storage -->
+          </div>
+        </section>
+      </main>
+      <main id="recipeScreen" class="flex-1" hidden>
+        <!-- Just an example, feel free to edit as necessary -->
+        <section>
+          <h2 id="recipeTitle">(Recipe Title)</h2>
+          <img id="recipeImage" src="#" alt="" />
+          <ul id="recipeIngredientList">
+            <li>Recipe Ingredient #1</li>
+            <li>Recipe Ingredient #2 etc</li>
+          </ul>
+          <p>
+            See the full recipe article:
+            <a id="recipeLink" href="link to original recipe site">Link</a>
+          </p>
+        </section>
+      </main>
+      <nav class="flex flex-none h-auto bg-red-100 justify-center gap-3 p-3">
+        <button
+          data-value="optionsScreen"
+          class="w-48 p-3 bg-purple-600 rounded-md text-white"
+        >
+          Options
+        </button>
+        <button data-value="mapScreen" class="w-48 p-3 bg-purple-600 rounded-md text-white">
+          Find a Restaurant
+        </button>
+        <button
+          data-value="recipesScreen"
+          class="w-48 p-3 bg-purple-600 rounded-md text-white"
+        >
+          Recipes
+        </button>
+      </nav>
+    </div>
     <!-- <script src="./assets/js/script.js" type="module"></script> -->
   </body>
 </html>
