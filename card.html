@@ -1,23 +1,48 @@
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./assets/css/style.css" />
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="./tailwind.config.js"></script>
     <title>Card example</title>
-</head>
-<body>
-    <div class="flex items-center text-center justify-center">
-        <div class="rounded-3xl border-4 border-solid border-blue-200 bg-slate-400 w-96 h-3/5 overflow-hidden">
-            <img src="https://via.placeholder.com/400x550" alt="placeholder">
-            <button class="mt-2 mb-2 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">Accept</button>
-            <button class="mt-2 mb-2 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">Reject</button>
-        </div>
+  </head>
+  <body>
+    <div
+      class="flex relative flex-col border-gray-600 border-2 rounded-3xl w-72 h-96 overflow-hidden shadow-2xl"
+    >
+      <div class="flex-none h-2/3">
+        <img
+          class="h-full w-full object-cover select-none pointer-events-none"
+          src="https://source.unsplash.com/random"
+          alt="placeholder"
+          class=""
+        />
+      </div>
+      <div class="flex-1 h-1/6 text-xl font-sans p-3 overflow-hidden">
+        <h2 class="overflow-hidden overflow-ellipsis whitespace-nowrap">
+          Title, Like an obnoxiously long recipe title from one of those stupid sites
+        </h2>
+      </div>
+      <div class="flex flex-none justify-between m-3">
+        <button
+          class="w-12 h-12 rounded-3xl border-solid border-2 border-rose-500 hover:bg-rose-400"
+        >
+          ✘
+        </button>
+        <button
+          class="w-12 h-12 rounded-3xl border-solid border-2 border-lime-500 hover:bg-lime-400"
+        >
+          ✔
+        </button>
+      </div>
     </div>
-    <div class="flex items-center justify-center p-5">
+    <!-- <div class="flex items-center justify-center p-5">
         <button class="mr-2 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow animate-bounce">Settings</button>
         <button class="mr-2 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow animate-bounce">find a place</button>
         <button class="mr-2 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow animate-bounce">recipes</button>
-    </div>
-</body>
+    </div> -->
+  </body>
 </html>
+<!-- flex items-center text-center justify-center bg-slate-400 -->
