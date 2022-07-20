@@ -1,8 +1,19 @@
 import RecipeQuery from "./RecipeQuery.js";
 import recipeCard from "./render-swipe-card.js";
+import Swipe from "./Swipe.js";
 const query = new RecipeQuery();
+let swipe;
 
-var cards = document.getElementById("cards");
+const recipeCardContainer = document.getElementById("cards");
+const cards = document.getElementById("cards");
+
+recipeCardContainer.addEventListener("pointerdown", grabCard);
+
+function grabCard(e) {
+  const card = e.target.closest(".recipeCard");
+  if (!card) return;
+  swipe = new Swipe(e.x, e.y, card);
+}
 
 async function getInitialCards() {
   const arr = [];

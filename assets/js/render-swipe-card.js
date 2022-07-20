@@ -19,7 +19,7 @@ function recipeCard(recipe) {
   // elem.id = 'smallCard';
   elem.setAttribute(
     "class",
-    "flex absolute flex-col border-gray-600 border-2 rounded-3xl w-72 h-5/6 overflow-hidden shadow-2xl left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+    "flex absolute flex-col border-gray-600 border-2 rounded-3xl w-72 h-5/6 max-h-96 overflow-hidden shadow-2xl left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white recipeCard"
   );
 
   var imgDsp = document.createElement("div");

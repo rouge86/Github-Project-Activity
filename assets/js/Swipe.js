@@ -34,7 +34,8 @@ class Swipe {
       this.element.style.boxShadow = `0 0 20px hsla(${
         percentage > 0 ? "100" : "360"
       }, 100%, 40%, ${Math.abs(percentage)})`;
-      this.element.style.transform = `translate(${deltaX}px, ${deltaY}px) rotate(${
+      console.log(this.element.style.transform);
+      this.element.style.transform = `translate(-50%, -50%) translate(${deltaX}px, ${deltaY}px) rotate(${
         deltaX / 20
       }deg)`;
     });
@@ -48,7 +49,7 @@ class Swipe {
     if (this.percentage === -1) this.reject();
     requestAnimationFrame(() => {
       this.element.style.transition = "400ms";
-      this.element.style.transform = "none";
+      this.element.style.transform = "translate(-50%, -50%)";
       this.element.style.boxShadow = null;
     });
   };
