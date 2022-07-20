@@ -211,6 +211,7 @@ class RecipeQuery {
       [
         "uri", // use as the recipe id
         "label", // the title
+        "images",
         "ingredients",
         "source", // title of the website the recipe came from
         "url", // link to that site

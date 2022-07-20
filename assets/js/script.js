@@ -1,28 +1,13 @@
 import RecipeQuery from "./RecipeQuery.js";
-import recipes from "./recipes.js";
 import recipeCard from "./render-swipe-card.js";
 
-console.log(recipes);
-
 //---------- card display test-------------------------------
-recipeCard(recipes[0]);
-const card = recipeCard(recipes[0]);
 var cards = document.getElementById("cards");
+const query = new RecipeQuery();
+const recipe = await query.getRecipe();
+const card = recipeCard(recipe);
 cards.appendChild(card);
 //---------- card display test-------------------------------
-
-// const searchBtn = document.getElementById("search");
-
-const query = new RecipeQuery();
-const { dishTypes, cuisineTypes, mealTypes } = RecipeQuery;
-query.dessetMode();
-
-query.setDishTypes(dishTypes.pastry);
-
-const recipe = await query.getRecipe();
-query.displayRecipes();
-
-console.log(recipe?.label);
 
 // const mealTypes = document.getElementById("mealTypes");
 // const dishTypes = document.getElementById("dishTypes");
