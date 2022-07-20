@@ -1,13 +1,26 @@
 import RecipeQuery from "./RecipeQuery.js";
 import recipeCard from "./render-swipe-card.js";
-
-//---------- card display test-------------------------------
-var cards = document.getElementById("cards");
 const query = new RecipeQuery();
-const recipe = await query.getRecipe();
-const card = recipeCard(recipe);
-cards.appendChild(card);
-//---------- card display test-------------------------------
+
+var cards = document.getElementById("cards");
+
+async function getInitialCards() {
+  const arr = [];
+  for (let i = 0; i < 5; i++) {
+    arr.push(query.getRecipe());
+  }
+  const recipeArray = await Promise.all(arr);
+  recipeArray.forEach(recipe => {
+    const card = recipeCard(recipe);
+    cards.appendChild(card);
+  });
+}
+
+function init() {
+  getInitialCards();
+}
+
+init();
 
 // const mealTypes = document.getElementById("mealTypes");
 // const dishTypes = document.getElementById("dishTypes");
