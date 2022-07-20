@@ -1,7 +1,17 @@
 import RecipeQuery from "./RecipeQuery.js";
 import recipes from "./recipes.js";
+import recipeCard from "./render-swipe-card.js"
 
 console.log(recipes);
+
+//---------- card display test-------------------------------
+recipeCard(recipes[0]);
+const card = recipeCard(recipes[0]);
+var cards = document.getElementById("cards");
+cards.appendChild(card);
+//---------- card display test-------------------------------
+
+
 // const searchBtn = document.getElementById("search");
 
 // const mealTypes = document.getElementById("mealTypes");
