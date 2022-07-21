@@ -6,6 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="./tailwind.config.js"></script>
+    <script
+      src="https://kit.fontawesome.com/ac7b8e3d3f.js"
+      crossorigin="anonymous"
+    ></script>
     <link rel="stylesheet" type="text/css" href="./assets/css/style.css" />
   </head>
   <body>
@@ -19,7 +23,7 @@
               <h1
                 class="flex-none h-fit text-7xl font-bold text-center text-red-500"
               >
-                Food Tinder
+                Nibbles <i class="fa fa-heart" style="color: #ef4444"></i>
               </h1>
             </header>
             <section id="cards" class="relative flex-1 recipeCards">
@@ -34,17 +38,28 @@
             >
               Health Options
             </h2>
-            <div class="container">
+            <ul class="container" id="labelSection">
               <!-- Render list items with javascript, load data from RecipeQuery.healthLables -->
-            </div>
+            </ul>
           </section>
         </main>
         <main id="mapScreen" class="flex-1" hidden>
           <div class="flex flex-1 flex-col h-full">
+            <input
+              id="searchInput"
+              class="controls"
+              type="text"
+              placeholder="Enter restaurant here"
+            />
             <section id="panel"></section>
             <section id="map"></section>
-            <input type="text" />
-            <button></button>
+            <ul class="geo-data">
+              <li>Full Address <span id="location"></span></li>
+              <li>Phone <span id="phone"></span></li>
+              <li>Hours <span id="hours"></span></li>
+              <li>Rating <span id="rating"></span></li>
+              <li>Website <span id="website"></span></li>
+            </ul>
           </div>
         </main>
         <main id="recipesScreen" class="flex-1" hidden>
@@ -120,5 +135,10 @@
       </nav>
     </div>
     <script src="./assets/js/script.js" type="module"></script>
+
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDzPFJ3lJRw2q2L9dOirODvpNXSxbA1e8E&libraries=places&callback=initSearch"
+      defer
+    ></script>
   </body>
 </html>
