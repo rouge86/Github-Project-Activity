@@ -52,7 +52,7 @@ class Swipe {
 
     if (Math.abs(this.percentage) === 1) {
       const accept = this.percentage === 1;
-      if (accept) this.onAccept();
+      this.onAccept(accept, this.element);
 
       requestAnimationFrame(() => {
         // Disappear the card... with style 😎
