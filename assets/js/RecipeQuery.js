@@ -7,14 +7,25 @@ class RecipeQuery {
   #mealTypes;
   #cuisineTypes;
   #dishTypes;
+  #recipes; // array of recipes held ready for converting into cards
+  #activeRecipes; // array of recipes that are currently being used by swipe cards - separate array so we don't double up
+  #mode; // main-course mode or dessert mode
+  #working; // boolean - currently fetching data
   constructor() {
     this.#health = [];
     this.#ingredients = [];
     this.#mealTypes = [];
     this.#cuisineTypes = [];
     this.#dishTypes = [];
+    this.#recipes = [];
+    this.#activeRecipes = [];
+    this.#mode = RecipeQuery.modeType.mainCourse;
   }
-
+  static modeType = {
+    mainCourse: "main course",
+    desserts: "desserts",
+    sides: "side dish",
+  };
   static mealTypes = {
     breakfast: "breakfast",
     brunch: "brunch",
@@ -47,28 +58,28 @@ class RecipeQuery {
     world: "world",
   };
   static dishTypes = {
-    // alcoholCocktail: "alcohol cocktail",
-    // cookies: "biscuits and cookies",
-    // bread: "bread",
+    alcoholCocktail: "alcohol cocktail",
+    cookies: "biscuits and cookies",
+    bread: "bread",
     // cereals: "cereals",
     // condimentsAndSauces: "condiments and sauces",
-    desserts: "desserts",
+    // desserts: "desserts",
     // drinks: "drinks",
     // egg: "egg",
     // iceCreamAndCustard: "ice cream and custard",
-    mainCourse: "main course",
-    // pancake: "pancake",
-    // pasta: "pasta",
-    // pastry: "pastry",
-    // piesAndTarts: "pies and tarts",
-    // pizza: "pizza",
+    // mainCourse: "main course",
+    pancake: "pancake",
+    pasta: "pasta",
+    pastry: "pastry",
+    piesAndTarts: "pies and tarts",
+    pizza: "pizza",
     // preps: "preps",
     // preserve: "preserve",
-    // salad: "salad",
-    // sandwihces: "sandwiches",
-    // seafood: "seafood",
+    salad: "salad",
+    sandwihces: "sandwiches",
+    seafood: "seafood",
     // sideDish: "side dish",
-    // soup: "soup",
+    soup: "soup",
     // specialOccasions: "special occasions",
     // starter: "starter",
     // sweets: "sweets",
@@ -99,15 +110,86 @@ class RecipeQuery {
     pescatarian: "pescatarian",
   };
 
-  async getRecipes() {
+  async #getRecipes() {
     try {
+      this.#working = true;
       const data = await this.#executeQuery();
-      const recipes = data.hits.map(hit => hit.recipe);
+      const recipes = this.#formatRecipeResponse(data);
+      this.#recipes = this.#recipes.concat(recipes);
+      this.#working = false;
       return recipes;
     } catch (error) {
       console.warn(error);
+      this.#working = false;
       return null;
     }
+  }
+
+  mainCourseMode() {
+    const { mainCourse } = RecipeQuery.modeType;
+    this.#mode = mainCourse;
+    this.#recipes = this.#recipes.filter(recipe => recipe.dishType.includes(mainCourse));
+    if (this.#recipes.length < 5) this.#getRecipes();
+  }
+
+  dessetMode() {
+    const { desserts } = RecipeQuery.modeType;
+    this.#mode = desserts;
+    this.#recipes = this.#recipes.filter(recipe => recipe.dishType.includes(desserts));
+    if (this.#recipes.length < 5) this.#getRecipes();
+  }
+  sideDishMode() {
+    const { sides } = RecipeQuery.modeType;
+    this.#mode = sides;
+    this.#recipes = this.#recipes.filter(recipe => recipe.dishType.includes(sides));
+    if (this.#recipes.length < 5) this.#getRecipes();
+  }
+
+  async getRecipe() {
+    // If there are no recipes already loaded
+    if (this.#recipes.length < 1) {
+      // And the Class is not currently trying to fetch more
+      if (!this.#working) this.#getRecipes();
+
+      // Polling function - check the recipes every 100ms while the Class is working
+      while (this.#working) {
+        // Create a promise that resolves on a timeout of 100ms
+        const timeout = new Promise(resolve => {
+          setTimeout(resolve, 100);
+        });
+        // Wait for this promise before continuing logic
+        await timeout;
+
+        const recipe = this.#recipes.pop();
+        if (recipe) {
+          this.#activeRecipes.push(recipe);
+          return recipe;
+        }
+      }
+    } else {
+      const recipe = this.#recipes.pop();
+      this.#activeRecipes.push(recipe);
+      return recipe;
+    }
+    return null;
+  }
+
+  getActiveRecipeByUri(uri) {
+    const recipe = this.#activeRecipes.find(recipe => recipe.uri === uri);
+    return recipe;
+  }
+
+  displayRecipes() {
+    this.#recipes.forEach(recipe => {
+      console.log(recipe.label);
+    });
+  }
+
+  #formatRecipeResponse(data) {
+    return data.hits.map(hit => ({
+      ...hit.recipe,
+      requery: hit["_links"].self.href,
+    }));
   }
 
   async #executeQuery() {
@@ -129,6 +211,7 @@ class RecipeQuery {
     url.searchParams.append("app_key", this.#apiKey);
     url.searchParams.append("type", "public");
     url.searchParams.append("random", "true");
+    url.searchParams.append("dishType", this.#mode);
     if (this.#ingredients.length > 0)
       url.searchParams.append("q", this.#ingredients.join(" "));
 
@@ -136,6 +219,24 @@ class RecipeQuery {
     this.#appendArrayUrl(url, this.#health, "health");
     this.#appendArrayUrl(url, this.#cuisineTypes, "cuisineType");
     this.#appendArrayUrl(url, this.#dishTypes, "dishType");
+    this.#appendArrayUrl(
+      url, // The fields we are going to get back from the api
+      [
+        "uri", // use as the recipe id
+        "label", // the title
+        "images",
+        "ingredients",
+        "source", // title of the website the recipe came from
+        "url", // link to that site
+        "yield", // how many items/serves
+        "totalWeight",
+        "healthLabels", // vegan, peanut-free etc
+        "mealType", // breakfast, lunch, dinner etc
+        "cuisineType", // american, indian, mediterranean etc
+        "dishType", // main course, dessert, pastry, pizza, etc
+      ],
+      "field"
+    );
 
     return url;
   }
