@@ -4,10 +4,22 @@ import Swipe from "./Swipe.js";
 const query = new RecipeQuery();
 let swipe;
 
+var mainCollection = document.querySelectorAll("main");
+const nav = document.querySelector("nav");
 const recipeCardContainer = document.getElementById("cards");
 const cards = document.getElementById("cards");
 
 recipeCardContainer.addEventListener("pointerdown", grabCard);
+
+nav.onclick = function (event) {
+  if (!event.target.matches("button")) return;
+  const location = event.target.dataset.value;
+  Array.from(mainCollection).forEach((mainEl) => {
+    mainEl.hidden = true;
+  });
+
+  document.getElementById(location).hidden = false;
+};
 
 function onAccept(recipeId) {
   // This function will run on a succesful swipe (swipe right only)
@@ -43,7 +55,7 @@ async function getInitialCards() {
     arr.push(query.getRecipe());
   }
   const recipeArray = await Promise.all(arr);
-  recipeArray.forEach(recipe => {
+  recipeArray.forEach((recipe) => {
     const card = recipeCard(recipe);
     cards.prepend(card);
   });

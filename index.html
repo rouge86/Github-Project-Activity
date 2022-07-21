@@ -13,8 +13,12 @@
       <div class="flex flex-1">
         <main id="mainScreen" class="flex-col flex-1">
           <div class="flex flex-col h-full">
-            <header class="flex-none bg-red-100 border-b-4 border-solid border-red-300 p-5">
-              <h1 class="flex-none h-fit text-7xl font-bold text-center text-red-500">
+            <header
+              class="flex-none bg-red-100 border-b-4 border-solid border-red-300 p-5"
+            >
+              <h1
+                class="flex-none h-fit text-7xl font-bold text-center text-red-500"
+              >
                 Food Tinder
               </h1>
             </header>
@@ -36,10 +40,12 @@
           </section>
         </main>
         <main id="mapScreen" class="flex-1" hidden>
-          <section id="panel"></section>
-          <section id="map"></section>
-          <input type="text" />
-          <button></button>
+          <div class="flex flex-1 flex-col h-full">
+            <section id="panel"></section>
+            <section id="map"></section>
+            <input type="text" />
+            <button></button>
+          </div>
         </main>
         <main id="recipesScreen" class="flex-1" hidden>
           <section>
@@ -87,6 +93,12 @@
       <nav
         class="flex flex-none h-auto bg-red-100 border-t-4 border-solid border-red-300 justify-center gap-3 p-3"
       >
+        <button
+          data-value="mainScreen"
+          class="w-48 p-3 bg-purple-600 rounded-md text-white"
+        >
+          Home
+        </button>
         <button
           data-value="optionsScreen"
           class="w-48 p-3 bg-red-300 rounded-md text-black font-bold"
