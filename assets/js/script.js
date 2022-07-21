@@ -20,12 +20,13 @@ recipeCardContainer.addEventListener("pointerdown", grabCard);
 nav.onclick = function (event) {
   if (!event.target.matches("button")) return;
   const location = event.target.dataset.value;
-  Array.from(mainCollection).forEach((mainEl) => {
+  Array.from(mainCollection).forEach(mainEl => {
     mainEl.hidden = true;
   });
 
   document.getElementById(location).hidden = false;
 };
+window.addEventListener("touchstart", e => e.preventDefault());
 
 function onAccept(recipeId) {
   // This function will run on a succesful swipe (swipe right only)
@@ -40,7 +41,13 @@ function onAccept(recipeId) {
     const recipe = await query.getRecipe();
     const newCard = recipeCard(recipe);
     cards.prepend(newCard);
+    bringForward(card.previousSibling);
   };
+}
+
+function bringForward(element) {
+  element.style.transition = "200ms ease-out";
+  element.style.transform = "translate(-50%, -50%)";
 }
 
 function saveRecipe(recipe) {
@@ -61,10 +68,11 @@ async function getInitialCards() {
     arr.push(query.getRecipe());
   }
   const recipeArray = await Promise.all(arr);
-  recipeArray.forEach((recipe) => {
+  recipeArray.forEach(recipe => {
     const card = recipeCard(recipe);
     cards.prepend(card);
   });
+  bringForward(cards.lastChild);
 }
 
 function init() {

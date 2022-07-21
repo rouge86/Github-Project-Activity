@@ -1,4 +1,4 @@
-const X_THRESHOLD = 300;
+const X_THRESHOLD = 110;
 
 class Swipe {
   x;
@@ -22,6 +22,7 @@ class Swipe {
     window.addEventListener("pointerup", this.onUp);
   }
   onMove = e => {
+    e.preventDefault();
     const { x, y, pressure } = e;
     this.finalX = x;
     this.finalY = y;
@@ -40,9 +41,9 @@ class Swipe {
         percentage > 0 ? "100" : "360"
       }, 100%, 40%, ${Math.abs(percentage)})`;
 
-      this.element.style.transform = `translate(-50%, -50%) translate(${deltaX}px, ${deltaY}px) rotate(${
+      this.element.style.transform = `translate(-50%, -50%) translate(${deltaX}px, ${deltaY}px) rotateZ(${
         deltaX / 20
-      }deg)`;
+      }deg) rotateY(${deltaX / -40}deg)`;
     });
   };
 
@@ -56,10 +57,13 @@ class Swipe {
 
       requestAnimationFrame(() => {
         // Disappear the card... with style 😎
+        const neg = accept ? "" : "-";
         this.element.style.transition = "400ms";
         this.element.style.opacity = "0";
+
         this.element.style.transform =
-          this.element.style.transform + ` rotate(${accept ? "" : "-"}120deg) scale(0.5)`;
+          this.element.style.transform +
+          `translate(${neg}200px, 150px) rotate(${neg}120deg) scale(0.5)`;
       });
     } else {
       // Card hasn't been swiped far enough, move it back to original position
