@@ -1,8 +1,14 @@
 import RecipeQuery from "./RecipeQuery.js";
 import recipeCard from "./render-swipe-card.js";
 import Swipe from "./Swipe.js";
+import realCreate from "./healthLables.js";
 const query = new RecipeQuery();
 let swipe;
+
+//labelCon
+const labelCon = document.getElementById("labelSection");
+var labelArry = Object.values(RecipeQuery.healthLabels);
+//-----------------------
 
 var mainCollection = document.querySelectorAll("main");
 const nav = document.querySelector("nav");
@@ -63,6 +69,11 @@ async function getInitialCards() {
 
 function init() {
   getInitialCards();
+
+  var labelElemAry = realCreate(labelArry);
+  for (var i = 0; i < labelElemAry.length; i++) {
+    labelCon.appendChild(labelElemAry[i]);
+  }
 }
 
 init();

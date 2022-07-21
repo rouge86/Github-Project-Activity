@@ -3,6 +3,10 @@ img {
   /* box-shadow: 0 0 20px hsl(100, 100%, 52%); */
 }
 
+label {
+  text-transform: capitalize;
+}
+
 /* * {
   margin: 0;
 }
