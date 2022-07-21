@@ -7,7 +7,8 @@ class RecipeQuery {
   #mealTypes;
   #cuisineTypes;
   #dishTypes;
-  #recipes;
+  #recipes; // array of recipes held ready for converting into cards
+  #activeRecipes; // array of recipes that are currently being used by swipe cards - separate array so we don't double up
   #mode; // main-course mode or dessert mode
   #working; // boolean - currently fetching data
   constructor() {
@@ -17,8 +18,8 @@ class RecipeQuery {
     this.#cuisineTypes = [];
     this.#dishTypes = [];
     this.#recipes = [];
+    this.#activeRecipes = [];
     this.#mode = RecipeQuery.modeType.mainCourse;
-    // this.#getRecipes();
   }
   static modeType = {
     mainCourse: "main course",
@@ -145,25 +146,37 @@ class RecipeQuery {
   }
 
   async getRecipe() {
-    const recipe = this.#recipes.pop();
-    // Return a recipe straight away if this.#recipes is populated with data
-    if (recipe) return recipe;
+    // If there are no recipes already loaded
+    if (this.#recipes.length < 1) {
+      // And the Class is not currently trying to fetch more
+      if (!this.#working) this.#getRecipes();
 
-    // If not, but we know the api is currently working on fetching more data then poll the #recipes array every 100ms
-    while (this.#working) {
-      const timeout = new Promise(resolve => {
-        setTimeout(resolve, 100);
-      });
-      await timeout;
+      // Polling function - check the recipes every 100ms while the Class is working
+      while (this.#working) {
+        // Create a promise that resolves on a timeout of 100ms
+        const timeout = new Promise(resolve => {
+          setTimeout(resolve, 100);
+        });
+        // Wait for this promise before continuing logic
+        await timeout;
+
+        const recipe = this.#recipes.pop();
+        if (recipe) {
+          this.#activeRecipes.push(recipe);
+          return recipe;
+        }
+      }
+    } else {
       const recipe = this.#recipes.pop();
-      if (recipe) return recipe;
+      this.#activeRecipes.push(recipe);
+      return recipe;
     }
+    return null;
+  }
 
-    // If there aren't any recipes and there is no current request under way
-    await this.#getRecipes();
-
-    // If recipes is still unpopulated here then there is an issue with the setup of the query, ie the query is responding with 0 hits
-    return this.#recipes.pop();
+  getActiveRecipeByUri(uri) {
+    const recipe = this.#activeRecipes.find(recipe => recipe.uri === uri);
+    return recipe;
   }
 
   displayRecipes() {

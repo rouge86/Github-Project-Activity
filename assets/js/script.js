@@ -9,10 +9,24 @@ const cards = document.getElementById("cards");
 
 recipeCardContainer.addEventListener("pointerdown", grabCard);
 
+function onAccept(recipeId) {
+  // This function will run on a succesful swipe (swipe right only)
+  return () => {
+    const recipe = query.getActiveRecipeByUri(recipeId);
+    saveRecipe(recipe);
+  };
+}
+
+function saveRecipe(recipe) {
+  const recipes = JSON.parse(localStorage.getItem("recipes")) || [];
+  recipes.push(recipe);
+  localStorage.setItem("recipes", JSON.stringify(recipes));
+}
+
 function grabCard(e) {
   const card = e.target.closest(".recipeCard");
   if (!card) return;
-  swipe = new Swipe(e.x, e.y, card);
+  swipe = new Swipe(e, card, onAccept(card.dataset.id));
 }
 
 async function getInitialCards() {
