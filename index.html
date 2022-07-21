@@ -54,10 +54,21 @@
         </main>
         <main id="mapScreen" class="h-full w-full" hidden>
           <div class="flex flex-1 flex-col h-full">
+            <input
+              id="searchInput"
+              class="controls"
+              type="text"
+              placeholder="Enter restaurant here"
+            />
             <section id="panel"></section>
             <section id="map"></section>
-            <input type="text" />
-            <button></button>
+            <ul class="geo-data">
+              <li>Full Address <span id="location"></span></li>
+              <li>Phone <span id="phone"></span></li>
+              <li>Hours <span id="hours"></span></li>
+              <li>Rating <span id="rating"></span></li>
+              <li>Website <span id="website"></span></li>
+            </ul>
           </div>
         </main>
         <main id="recipesScreen" class="h-full w-full" hidden>
@@ -161,5 +172,10 @@
       </nav>
     </div>
     <script src="./assets/js/script.js" type="module"></script>
+
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDzPFJ3lJRw2q2L9dOirODvpNXSxbA1e8E&libraries=places&callback=initSearch"
+      defer
+    ></script>
   </body>
 </html>
