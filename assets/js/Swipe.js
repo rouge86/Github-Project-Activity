@@ -1,4 +1,4 @@
-const X_THRESHOLD = 300;
+const X_THRESHOLD = 150;
 
 class Swipe {
   x;
@@ -56,10 +56,13 @@ class Swipe {
 
       requestAnimationFrame(() => {
         // Disappear the card... with style 😎
+        const neg = accept ? "" : "-";
         this.element.style.transition = "400ms";
         this.element.style.opacity = "0";
+
         this.element.style.transform =
-          this.element.style.transform + ` rotate(${accept ? "" : "-"}120deg) scale(0.5)`;
+          this.element.style.transform +
+          `translate(${neg}200px, 150px) rotate(${neg}120deg) scale(0.5)`;
       });
     } else {
       // Card hasn't been swiped far enough, move it back to original position
