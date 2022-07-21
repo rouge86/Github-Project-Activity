@@ -9,59 +9,35 @@
     <link rel="stylesheet" type="text/css" href="./assets/css/style.css" />
   </head>
   <body>
-    <div class="flex flex-col h-screen bg-slate-100">
+    <div class="flex flex-col h-screen bg-red-50">
       <div class="flex flex-1">
-        <main id="mainScreen" class="flex-1">
-          <div class="flex flex-1 flex-col h-full">
-            <header>
-              <h1 class="flex-none h-fit text-7xl font-bold text-center">
+        <main id="mainScreen" class="flex-col flex-1">
+          <div class="flex flex-col h-full">
+            <header
+              class="flex-none bg-red-100 border-b-4 border-solid border-red-300 p-5"
+            >
+              <h1
+                class="flex-none h-fit text-7xl font-bold text-center text-red-500"
+              >
                 Food Tinder
               </h1>
             </header>
-            <section id="cards" class="relative h-full recipeCards">
-              <div
-                class="flex absolute flex-col border-gray-600 border-2 rounded-3xl w-72 h-5/6 overflow-hidden shadow-2xl left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
-              >
-                <div class="flex-none h-2/3">
-                  <img
-                    class="h-full w-full object-cover select-none pointer-events-none"
-                    src="https://source.unsplash.com/random"
-                    alt="placeholder"
-                  />
-                </div>
-                <div class="flex-1 h-1/6 text-xl font-sans p-3 overflow-hidden">
-                  <h2
-                    class="overflow-hidden overflow-ellipsis whitespace-nowrap"
-                  >
-                    Title, Like an obnoxiously long recipe title from one of
-                    those stupid sites
-                  </h2>
-                </div>
-                <div class="flex flex-none justify-between m-3">
-                  <button
-                    class="w-12 h-12 rounded-3xl border-solid border-2 border-rose-500 hover:bg-rose-400"
-                  >
-                    ✘
-                  </button>
-                  <button
-                    class="w-12 h-12 rounded-3xl border-solid border-2 border-lime-500 hover:bg-lime-400"
-                  >
-                    ✔
-                  </button>
-                </div>
-              </div>
+            <section id="cards" class="relative flex-1 recipeCards">
+              <!-- created card go here-->
             </section>
           </div>
         </main>
         <main id="optionsScreen" class="flex-1" hidden>
-          <div class="flex flex-1 flex-col h-full">
-            <section>
-              <h2 class="text-4xl font-bold text-center">Health Options</h2>
-              <div class="container">
-                <!-- Render list items with javascript, load data from RecipeQuery.healthLables -->
-              </div>
-            </section>
-          </div>
+          <section>
+            <h2
+              class="text-7xl text-red-500 font-bold text-center border-b-4 border-solid border-red-300 bg-red-100 p-5"
+            >
+              Health Options
+            </h2>
+            <div class="container">
+              <!-- Render list items with javascript, load data from RecipeQuery.healthLables -->
+            </div>
+          </section>
         </main>
         <main id="mapScreen" class="flex-1" hidden>
           <div class="flex flex-1 flex-col h-full">
@@ -72,21 +48,36 @@
           </div>
         </main>
         <main id="recipesScreen" class="flex-1" hidden>
-          <div class="flex flex-1 flex-col h-full">
-            <section>
-              <h2>Recipes</h2>
-              <div id="recipesContainer" class="container">
-                <!-- Render list items with javascript, load data from local storage -->
-              </div>
-            </section>
-          </div>
+          <section>
+            <h2
+              class="text-7xl text-red-500 font-bold text-center border-b-4 border-solid border-red-300 bg-red-100 p-5"
+            >
+              Recipes
+            </h2>
+            <div id="recipesContainer" class="container">
+              <!-- Render list items with javascript, load data from local storage -->
+            </div>
+          </section>
         </main>
-        <main id="recipeScreen" class="flex-1" hidden>
-          <div class="flex flex-1 flex-col h-full">
-            <!-- Just an example, feel free to edit as necessary -->
-            <section>
-              <h2 id="recipeTitle">(Recipe Title)</h2>
-              <img id="recipeImage" src="#" alt="" />
+        <main id="recipeScreen" class="flex-1 bg-red-50" hidden>
+          <!-- Just an example, feel free to edit as necessary -->
+          <section class="relative h-full">
+            <h2
+              class="text-7xl text-red-500 font-bold text-center border-b-4 border-solid border-red-300 bg-red-100 p-5"
+              id="recipeTitle"
+            >
+              Recipe
+            </h2>
+            <div
+              class="absolute text-center bg-white border-gray-600 border-2 rounded-3xl w-80 h-96 overflow-hidden shadow-2xl left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+            >
+              <img
+                class="h-1/2 w-full object-cover select-none pointer-events-none"
+                id="recipeImage"
+                src="https://source.unsplash.com/random"
+                alt="placeholder"
+              />
+              <h3 class="text-5xl font-bold">(Recipe title)</h3>
               <ul id="recipeIngredientList">
                 <li>Recipe Ingredient #1</li>
                 <li>Recipe Ingredient #2 etc</li>
@@ -95,11 +86,13 @@
                 See the full recipe article:
                 <a id="recipeLink" href="link to original recipe site">Link</a>
               </p>
-            </section>
-          </div>
+            </div>
+          </section>
         </main>
       </div>
-      <nav class="flex flex-none h-auto bg-red-100 justify-center gap-3 p-3">
+      <nav
+        class="flex flex-none h-auto bg-red-100 border-t-4 border-solid border-red-300 justify-center gap-3 p-3"
+      >
         <button
           data-value="mainScreen"
           class="w-48 p-3 bg-purple-600 rounded-md text-white"
@@ -108,19 +101,19 @@
         </button>
         <button
           data-value="optionsScreen"
-          class="w-48 p-3 bg-purple-600 rounded-md text-white"
+          class="w-48 p-3 bg-red-300 rounded-md text-black font-bold"
         >
           Options
         </button>
         <button
           data-value="mapScreen"
-          class="w-48 p-3 bg-purple-600 rounded-md text-white"
+          class="w-48 p-3 bg-red-300 rounded-md text-black font-bold"
         >
           Find a Restaurant
         </button>
         <button
           data-value="recipesScreen"
-          class="w-48 p-3 bg-purple-600 rounded-md text-white"
+          class="w-48 p-3 bg-red-300 rounded-md text-black font-bold"
         >
           Recipes
         </button>
