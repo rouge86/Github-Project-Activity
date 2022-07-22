@@ -6,7 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="./tailwind.config.js"></script>
-    <script src="https://kit.fontawesome.com/ac7b8e3d3f.js" crossorigin="anonymous"></script>
+    <script
+      src="https://kit.fontawesome.com/ac7b8e3d3f.js"
+      crossorigin="anonymous"
+    ></script>
     <link rel="stylesheet" type="text/css" href="./assets/css/style.css" />
   </head>
   <body>
@@ -14,8 +17,12 @@
       <div class="flex flex-1">
         <main id="mainScreen" class="flex-col flex-1">
           <div class="flex flex-col h-full">
-            <header class="flex-none bg-red-100 border-b-4 border-solid border-red-300 p-5">
-              <h1 class="flex-none h-fit text-7xl font-bold text-center text-red-500">
+            <header
+              class="flex-none bg-red-100 border-b-4 border-solid border-red-300 p-5"
+            >
+              <h1
+                class="flex-none h-fit text-7xl font-bold text-center text-red-500"
+              >
                 Nibbles <i class="fa fa-heart" style="color: #ef4444"></i>
               </h1>
             </header>
@@ -41,13 +48,15 @@
           </div>
         </main>
         <main id="recipesScreen" class="flex-1" hidden>
-          <section>
+          <section id="RecipeSec">
             <h2
               class="text-7xl text-red-500 font-bold text-center border-b-4 border-solid border-red-300 bg-red-100 p-5"
             >
               Recipes
             </h2>
-            <div id="recipesContainer" class="container"></div>
+            <ul id="recipesContainer" class="container">
+              <!-- Render list items with javascript, load data from local storage -->
+            </ul>
           </section>
         </main>
         <main id="recipeScreen" class="flex-1 bg-red-50" hidden>
@@ -83,7 +92,10 @@
       <nav
         class="flex flex-none h-auto bg-red-100 border-t-4 border-solid border-red-300 justify-center gap-3 p-3"
       >
-        <button data-value="mainScreen" class="w-48 p-3 bg-purple-600 rounded-md text-white">
+        <button
+          data-value="mainScreen"
+          class="w-48 p-3 bg-purple-600 rounded-md text-white"
+        >
           Home
         </button>
         <button
