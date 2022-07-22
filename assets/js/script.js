@@ -10,18 +10,23 @@ const labelArray = Object.values(RecipeQuery.healthLabels);
 const labelCon = document.getElementById("labelSection");
 var labelArry = Object.values(RecipeQuery.healthLabels);
 
-//-------------------------------------------------------
 const recipeCon = document.getElementById("recipesContainer");
 var recipeArry = JSON.parse(localStorage.getItem("recipes")) || [];
-
-//console.log(recipeArry);
-//-------------------------------------------------------
 
 const nav = document.querySelector("nav");
 const mainCollection = document.querySelectorAll("main");
 const labelContainer = document.getElementById("labelSection");
 const recipeCardContainer = document.getElementById("cards");
 const cards = document.getElementById("cards");
+
+labelCon.addEventListener("input", function (event) {
+  console.log(event.target.value);
+  if (event.target.checked) {
+    onLabelSave(event.target.value);
+  } else {
+    onLabelDelete(event.target.value);
+  }
+});
 
 nav.addEventListener("click", (event) => {
   if (!event.target.matches("button")) return;
@@ -48,6 +53,19 @@ function onAccept(recipeId) {
     cards.prepend(newCard);
     bringForward(card.previousSibling);
   };
+}
+
+function onLabelSave(healthLabel) {
+  var labelObject = JSON.parse(localStorage.getItem("healthLabel")) || {};
+  labelObject[healthLabel] = true;
+  console.log(labelObject);
+  localStorage.setItem("healthLabel", JSON.stringify(labelObject));
+}
+
+function onLabelDelete(healthLabel) {
+  var labelObject = JSON.parse(localStorage.getItem("healthLabel")) || {};
+  delete labelObject[healthLabel];
+  localStorage.setItem("healthLabel", JSON.stringify(labelObject));
 }
 
 function bringForward(element) {
