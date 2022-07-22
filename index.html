@@ -6,23 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="./tailwind.config.js"></script>
-    <script
-      src="https://kit.fontawesome.com/ac7b8e3d3f.js"
-      crossorigin="anonymous"
-    ></script>
+    <script src="https://kit.fontawesome.com/ac7b8e3d3f.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="./assets/css/style.css" />
   </head>
   <body>
     <div class="flex flex-col h-screen bg-red-50">
       <div class="flex flex-1">
-        <main id="mainScreen" class="flex-col flex-1">
+        <main id="mainScreen" class="flex-col flex-1" hidden>
           <div class="flex flex-col h-full">
-            <header
-              class="flex-none bg-red-100 border-b-4 border-solid border-red-300 p-5"
-            >
-              <h1
-                class="flex-none h-fit text-7xl font-bold text-center text-red-500"
-              >
+            <header class="flex-none bg-red-100 border-b-4 border-solid border-red-300 p-5">
+              <h1 class="flex-none h-fit text-7xl font-bold text-center text-red-500">
                 Nibbles <i class="fa fa-heart" style="color: #ef4444"></i>
               </h1>
             </header>
@@ -43,18 +36,22 @@
             </ul>
           </section>
         </main>
-        <main id="mapScreen" class="flex-1" hidden>
+        <main id="mapScreen" class="flex-1">
           <div class="flex flex-1 flex-col h-full">
+            <section id="panel" class=""></section>
+            <section id="map" class="w-full h-full bg-gray-400"></section>
             <input
               id="searchInput"
-              class="controls"
+              class="shadow appearance-none border rounded my-1 self-center min-w-[25rem] max-w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline controls"
               type="text"
-              placeholder="Enter restaurant here"
+              placeholder="Enter place here..."
             />
-            <section id="panel"></section>
-            <section id="map"></section>
-            <ul class="geo-data">
-              <li>Full Address <span id="location"></span></li>
+            <ul
+              class="bg-white self-center p-3 min-w-[25rem] w-fit max-w-full shadow border rounded geo-data"
+            >
+              <li class="flex justify-between mb-1">
+                Full Address <span id="location"></span>
+              </li>
               <li>Phone <span id="phone"></span></li>
               <li>Hours <span id="hours"></span></li>
               <li>Rating <span id="rating"></span></li>
@@ -108,10 +105,7 @@
       <nav
         class="flex flex-none h-auto bg-red-100 border-t-4 border-solid border-red-300 justify-center gap-3 p-3"
       >
-        <button
-          data-value="mainScreen"
-          class="w-48 p-3 bg-purple-600 rounded-md text-white"
-        >
+        <button data-value="mainScreen" class="w-48 p-3 bg-purple-600 rounded-md text-white">
           Home
         </button>
         <button
