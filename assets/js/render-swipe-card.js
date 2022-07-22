@@ -3,10 +3,10 @@ function recipeCard(recipe) {
   elem.dataset.id = recipe.uri;
   elem.setAttribute(
     "class",
-    "flex absolute flex-col border-gray-600 border-2 rounded-3xl w-72 h-5/6 max-h-96 overflow-hidden shadow-2xl left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white recipeCard"
+    "flex absolute flex-col border-gray-600 border-2 rounded-3xl overflow-hidden shadow-2xl inset-0 bg-white recipeCard"
   );
   elem.style.transformOrigin = "center";
-  elem.style.transform = "translate3d(-50%, -50%, -50px)";
+  elem.style.transform = "translateZ(-50px)";
 
   var imgDsp = document.createElement("div");
   imgDsp.setAttribute("class", "flex-none h-2/3");
@@ -35,21 +35,21 @@ function recipeCard(recipe) {
   btnDiv.setAttribute("class", "flex flex-none justify-between m-3");
   elem.appendChild(btnDiv);
 
-  var btnYes = document.createElement("button");
-  btnYes.setAttribute(
-    "class",
-    "w-12 h-12 rounded-3xl border-solid border-2 border-rose-500 hover:bg-rose-400 animate-bounc"
-  );
-  btnYes.textContent = "✘";
-  btnDiv.appendChild(btnYes);
-
   var btnNo = document.createElement("button");
   btnNo.setAttribute(
     "class",
-    "w-12 h-12 rounded-3xl border-solid border-2 border-lime-500 hover:bg-lime-400 animate-bounc"
+    "w-12 h-12 rounded-3xl border-solid border-2 border-rose-500 hover:bg-rose-400 animate-bounc reject"
   );
-  btnNo.textContent = "✔";
+  btnNo.textContent = "✘";
   btnDiv.appendChild(btnNo);
+
+  var btnYes = document.createElement("button");
+  btnYes.setAttribute(
+    "class",
+    "w-12 h-12 rounded-3xl border-solid border-2 border-lime-500 hover:bg-lime-400 animate-bounc accept"
+  );
+  btnYes.textContent = "✔";
+  btnDiv.appendChild(btnYes);
 
   return elem;
 }

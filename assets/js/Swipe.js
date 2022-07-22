@@ -7,15 +7,15 @@ class Swipe {
   finalY;
   element;
   percentage;
-  onAccept;
-  constructor(event, element, onAccept) {
+  onDecision;
+  constructor(event, element, onDecision) {
     const { x, y } = event;
     this.x = x;
     this.y = y;
     this.finalX = x;
     this.finalY = y;
     this.element = element;
-    this.onAccept = onAccept;
+    this.onDecision = onDecision;
     this.percentage = 0;
     element.style.transition = "none";
     window.addEventListener("pointermove", this.onMove);
@@ -40,8 +40,7 @@ class Swipe {
       this.element.style.boxShadow = `0 0 20px hsla(${
         percentage > 0 ? "100" : "360"
       }, 100%, 40%, ${Math.abs(percentage)})`;
-
-      this.element.style.transform = `translate(-50%, -50%) translate(${deltaX}px, ${deltaY}px) rotateZ(${
+      this.element.style.transform = `translate(${deltaX}px, ${deltaY}px) rotateZ(${
         deltaX / 20
       }deg) rotateY(${deltaX / -40}deg)`;
     });
@@ -50,26 +49,13 @@ class Swipe {
   onUp = () => {
     window.removeEventListener("pointerup", this.onUp);
     window.removeEventListener("pointermove", this.onMove);
-
     if (Math.abs(this.percentage) === 1) {
       const accept = this.percentage === 1;
-      this.onAccept(accept, this.element);
-
-      requestAnimationFrame(() => {
-        // Disappear the card... with style 😎
-        const neg = accept ? "" : "-";
-        this.element.style.transition = "400ms";
-        this.element.style.opacity = "0";
-
-        this.element.style.transform =
-          this.element.style.transform +
-          `translate(${neg}200px, 150px) rotate(${neg}120deg) scale(0.5)`;
-      });
+      this.onDecision(this.element, accept);
     } else {
-      // Card hasn't been swiped far enough, move it back to original position
       requestAnimationFrame(() => {
         this.element.style.transition = "400ms";
-        this.element.style.transform = "translate(-50%, -50%)";
+        this.element.style.transform = null;
         this.element.style.boxShadow = null;
       });
     }
