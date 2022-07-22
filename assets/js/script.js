@@ -31,10 +31,10 @@ labelCon.addEventListener("input", function (event) {
   }
 });
 
-nav.addEventListener("click", (event) => {
+nav.addEventListener("click", event => {
   if (!event.target.matches("button")) return;
   const location = event.target.dataset.value;
-  Array.from(mainCollection).forEach((mainEl) => {
+  Array.from(mainCollection).forEach(mainEl => {
     mainEl.hidden = true;
   });
   document.getElementById(location).hidden = false;
@@ -64,9 +64,6 @@ function onLabelDelete(healthLabel) {
   localStorage.setItem("healthLabel", JSON.stringify(labelObject));
 }
 
-function bringForward(element) {
-  element.style.transition = "200ms ease-out";
-  element.style.transform = "translate(-50%, -50%)";
 function onKeyPress(e) {
   if (e.key === "ArrowLeft") {
     handleDecision(cards.lastChild, false);
