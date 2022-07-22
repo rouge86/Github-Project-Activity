@@ -1,6 +1,4 @@
-//import RecipeQuery from "./RecipeQuery.js";
-
-function lableCreate(healthLabel) {
+function labelCreate(healthLabel) {
   var listItem = document.createElement("li");
   var label = document.createElement("label");
   var input = document.createElement("input");
@@ -16,11 +14,11 @@ function lableCreate(healthLabel) {
   return listItem;
 }
 
-function realCreate(labelArray) {
-  return labelArray.map((healthLabel) => {
-    return lableCreate(healthLabel);
+function createHealthLabelArray(labelArray) {
+  return labelArray.map(healthLabel => {
+    return labelCreate(healthLabel);
   });
 }
 
 //--------------
-export default realCreate;
+export default createHealthLabelArray;

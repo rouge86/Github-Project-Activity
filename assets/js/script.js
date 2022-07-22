@@ -2,31 +2,26 @@ import RecipeQuery from "./RecipeQuery.js";
 import recipeCard from "./render-swipe-card.js";
 import Swipe from "./Swipe.js";
 import realCreate from "./healthLables.js";
+
 const query = new RecipeQuery();
 let swipe;
+const labelArray = Object.values(RecipeQuery.healthLabels);
 
-//labelCon
-const labelCon = document.getElementById("labelSection");
-var labelArry = Object.values(RecipeQuery.healthLabels);
-//-----------------------
-
-var mainCollection = document.querySelectorAll("main");
 const nav = document.querySelector("nav");
+const mainCollection = document.querySelectorAll("main");
+const labelContainer = document.getElementById("labelSection");
 const recipeCardContainer = document.getElementById("cards");
 const cards = document.getElementById("cards");
 
-recipeCardContainer.addEventListener("pointerdown", grabCard);
-
-nav.onclick = function (event) {
+nav.addEventListener("click", event => {
   if (!event.target.matches("button")) return;
   const location = event.target.dataset.value;
   Array.from(mainCollection).forEach(mainEl => {
     mainEl.hidden = true;
   });
-
   document.getElementById(location).hidden = false;
-};
-window.addEventListener("touchstart", e => e.preventDefault());
+});
+recipeCardContainer.addEventListener("pointerdown", grabCard);
 
 function onAccept(recipeId) {
   // This function will run on a succesful swipe (swipe right only)
@@ -75,13 +70,16 @@ async function getInitialCards() {
   bringForward(cards.lastChild);
 }
 
+function renderHealthLabels() {
+  var labelElemAry = realCreate(labelArray);
+  for (var i = 0; i < labelElemAry.length; i++) {
+    labelContainer.appendChild(labelElemAry[i]);
+  }
+}
+
 function init() {
   getInitialCards();
-
-  var labelElemAry = realCreate(labelArry);
-  for (var i = 0; i < labelElemAry.length; i++) {
-    labelCon.appendChild(labelElemAry[i]);
-  }
+  renderHealthLabels();
 }
 
 init();

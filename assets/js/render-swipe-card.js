@@ -54,42 +54,4 @@ function recipeCard(recipe) {
   return elem;
 }
 
-//--------------------alternative-------------------------------------------
-// function recipeCard() {
-//   const html = `
-//     <div
-//     class="flex absolute flex-col border-gray-600 border-2 rounded-3xl w-72 h-5/6 overflow-hidden shadow-2xl left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 recipeCard"
-//     >
-//       <div class="flex-none h-2/3">
-//         <img
-//           class="h-full w-full object-cover select-none pointer-events-none"
-//           src="${recipes[0].images.REGULAR.url}"
-//           alt="placeholder"
-//         />
-//       </div>
-//       <div class="flex-1 h-1/6 text-xl font-sans p-3 overflow-hidden">
-//         <h2 class="overflow-hidden overflow-ellipsis whitespace-nowrap">
-//         ${recipes[0].label}
-//         </h2>
-//       </div>
-//       <div class="flex flex-none justify-between m-3">
-//         <button
-//           class="w-12 h-12 rounded-3xl border-solid border-2 border-rose-500 hover:bg-rose-400 animate-bounc"
-//         >
-//           ✘
-//         </button>
-//         <button
-//           class="w-12 h-12 rounded-3xl border-solid border-2 border-lime-500 hover:bg-lime-400 animate-bounc"
-//         >
-//           ✔
-//         </button>
-//       </div>
-//     </div>
-// `;
-//   const template = document.createElement("div");
-//   template.innerHTML = html.trim();
-//   const card = template.querySelector("recipeCard");
-//   return card;
-// }
-
 export default recipeCard;
