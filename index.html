@@ -14,18 +14,12 @@
       <div class="flex flex-1">
         <main id="mainScreen" class="flex-col flex-1">
           <div class="flex flex-col h-full">
-            <header
-              class="flex-none bg-red-100 border-b-4 border-solid border-red-300 p-5"
-            >
-              <h1
-                class="flex-none h-fit text-7xl font-bold text-center text-red-500"
-              >
-                Nibbles <i class='fa fa-heart' style='color:#ef4444'></i>
+            <header class="flex-none bg-red-100 border-b-4 border-solid border-red-300 p-5">
+              <h1 class="flex-none h-fit text-7xl font-bold text-center text-red-500">
+                Nibbles <i class="fa fa-heart" style="color: #ef4444"></i>
               </h1>
             </header>
-            <section id="cards" class="relative flex-1 recipeCards">
-              <!-- created card go here-->
-            </section>
+            <section id="cards" class="relative flex-1 recipeCards"></section>
           </div>
         </main>
         <main id="optionsScreen" class="flex-1" hidden>
@@ -35,9 +29,7 @@
             >
               Health Options
             </h2>
-            <ul class="container" id="labelSection">
-              <!-- Render list items with javascript, load data from RecipeQuery.healthLables -->
-            </ul>
+            <ul class="container" id="labelSection"></ul>
           </section>
         </main>
         <main id="mapScreen" class="flex-1" hidden>
@@ -55,13 +47,10 @@
             >
               Recipes
             </h2>
-            <div id="recipesContainer" class="container">
-              <!-- Render list items with javascript, load data from local storage -->
-            </div>
+            <div id="recipesContainer" class="container"></div>
           </section>
         </main>
         <main id="recipeScreen" class="flex-1 bg-red-50" hidden>
-          <!-- Just an example, feel free to edit as necessary -->
           <section class="relative h-full">
             <h2
               class="text-7xl text-red-500 font-bold text-center border-b-4 border-solid border-red-300 bg-red-100 p-5"
@@ -94,10 +83,7 @@
       <nav
         class="flex flex-none h-auto bg-red-100 border-t-4 border-solid border-red-300 justify-center gap-3 p-3"
       >
-        <button
-          data-value="mainScreen"
-          class="w-48 p-3 bg-purple-600 rounded-md text-white"
-        >
+        <button data-value="mainScreen" class="w-48 p-3 bg-purple-600 rounded-md text-white">
           Home
         </button>
         <button
