@@ -108,6 +108,13 @@ class RecipeQuery {
     paleo: "paleo",
     peanutFree: "peanut-free",
     pescatarian: "pescatarian",
+    porkFree: "pork-free",
+    redMeatFree: "red-meat-free",
+    sesameFree: "sesame-free",
+    shellfishFree: "shellfish-free",
+    soyFree: "soy-free",
+    vegan: "vegan",
+    vegetarian: "vegetarian",
   };
 
   async #getRecipes() {
