@@ -34,19 +34,24 @@ export function singleRecipeDsp(recipeID) {
 
   var recipeImage = document.getElementById("recipeImage");
   var RTitle = document.getElementById("RTitle");
-  //var recipeIngredientList = document.getElementById("recipeIngredientList");
+  var recipeIngredientList = document.getElementById("recipeIngredientList");
   var recipeLink = document.getElementById("recipeLink");
 
-  //signleIngredient = document.createElement("li");
+  renderIngredients(recipe.ingredientLines, recipeIngredientList);
 
   recipeImage.src = recipe.images.LARGE.url;
   RTitle.textContent = recipe.label;
   recipeLink.href = recipe.url;
-  //signleIngredient = recipe.ingredients;
 
   navigate("recipeScreen");
 }
-//--------------------------------------------------------------------------
 
-//--------------------------
+function renderIngredients(ingredientArry, container) {
+  ingredientArry.forEach((ingredient) => {
+    var signleIngredient = document.createElement("li");
+    signleIngredient.innerText = ingredient;
+    container.appendChild(signleIngredient);
+  });
+}
+
 export default realrecipeDsp;
