@@ -2,7 +2,7 @@ import RecipeQuery from "./RecipeQuery.js";
 import recipeCard from "./render-swipe-card.js";
 import Swipe from "./Swipe.js";
 import realCreate from "./healthLables.js";
-import realrecipeDsp from "./recipeDisplay.js";
+import realrecipeDsp, { singleRecipeDsp } from "./recipeDisplay.js";
 import navigate from "./navigate.js";
 import { handleCardDisplay, bringForward } from "./handle-card-display.js";
 
@@ -31,7 +31,7 @@ labelCon.addEventListener("input", function (event) {
   }
 });
 
-nav.addEventListener("click", event => {
+nav.addEventListener("click", (event) => {
   if (!event.target.matches("button")) return;
   const location = event.target.dataset.value;
   navigate(location);
@@ -113,6 +113,16 @@ function renderHealthLabels() {
     recipeCon.appendChild(recipeElemAry[i]);
   }
 }
+
+var recipeList = document.getElementById("recipesContainer");
+recipeList.addEventListener("click", function (event) {
+  var listItem = event.target.closest("li");
+  // //if (event.target.matches("li")) {
+  console.log(listItem);
+  var id = listItem.id;
+  singleRecipeDsp(id);
+  // //}
+});
 
 async function init() {
   renderHealthLabels();

@@ -9,7 +9,7 @@ function labelCreate(healthLabel, labelObject) {
   listItem.setAttribute("class", "w-48 flex flex-none justify-between");
   input.setAttribute("type", "checkbox");
 
-  console.log(labelObject);
+  //console.log(labelObject);
 
   input.value = healthLabel;
   input.checked = labelObject[healthLabel];
