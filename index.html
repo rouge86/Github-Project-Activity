@@ -15,7 +15,7 @@
   <body>
     <div class="flex flex-col h-screen bg-red-50">
       <div class="flex flex-1">
-        <main id="mainScreen" class="flex-col flex-1">
+        <main id="mainScreen" class="flex-col flex-1" hidden>
           <div class="flex flex-col h-full">
             <header
               class="flex-none bg-red-100 border-b-4 border-solid border-red-300 p-5"
@@ -52,15 +52,15 @@
             <button></button>
           </div>
         </main>
-        <main id="recipesScreen" class="flex-1" hidden>
-          <section id="RecipeSec">
+        <main id="recipesScreen" class="flex-1">
+          <section id="RecipeSec" class="h-full flex flex-col">
             <h2
               class="text-7xl text-red-500 font-bold text-center border-b-4 border-solid border-red-300 bg-red-100 p-5"
             >
               Recipes
             </h2>
-            <div class="">
-              <ul id="recipesContainer" class="container overflow-y-scroll">
+            <div class="flex flex-col h-full p-3">
+              <ul id="recipesContainer" class="container w-80 self-center h-full rounded border-solid border-4 border-gray-500 overflow-y-auto bg-white p-2">
                 <!-- Render list items with javascript, load data from local storage -->
               </ul>
             </div>
