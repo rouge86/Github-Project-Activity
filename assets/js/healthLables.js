@@ -3,17 +3,20 @@ function labelCreate(healthLabel, labelObject) {
   var label = document.createElement("label");
   var input = document.createElement("input");
 
-  listItem.appendChild(label);
   listItem.appendChild(input);
+  listItem.appendChild(label);
 
-  listItem.setAttribute("class", "w-48 flex flex-none justify-between");
+  listItem.setAttribute("class", "flex flex-none gap-6");
   input.setAttribute("type", "checkbox");
+  input.id = healthLabel;
 
   //console.log(labelObject);
 
   input.value = healthLabel;
   input.checked = labelObject[healthLabel];
   label.innerText = healthLabel.replace("-", " ");
+  label.setAttribute("for", healthLabel);
+  label.setAttribute("class", "hover:bg-blue-100 flex-1 rounded px-2");
 
   return listItem;
 }
