@@ -233,6 +233,7 @@ class RecipeQuery {
         "label", // the title
         "images",
         "ingredients",
+        "ingredientLines",
         "source", // title of the website the recipe came from
         "url", // link to that site
         "yield", // how many items/serves
