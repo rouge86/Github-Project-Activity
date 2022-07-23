@@ -32,8 +32,6 @@ function realrecipeDsp() {
   });
 }
 
-//--------------------------------------------------------------------------
-
 export function singleRecipeDsp(recipeID) {
   var recipe = loadRecipe(recipeID);
 

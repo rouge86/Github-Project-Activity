@@ -23,5 +23,4 @@ function createHealthLabelArray(labelArray) {
   });
 }
 
-//--------------
 export default createHealthLabelArray;

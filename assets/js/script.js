@@ -120,16 +120,13 @@ function renderRecipes() {
   }
 }
 
-//-------------------------------------------------------------------
 var recipeList = document.getElementById("recipesContainer");
 
 recipeList.addEventListener("click", function (event) {
-  //var deleteBtn = recipeList.getElementsByTagName("button");
   var listItem = event.target.closest("li");
   var id = listItem.id;
-  //console.log(listItem);
+
   if (event.target.matches("button")) {
-    //delete button check
     singleRecipeDelete(id);
     renderRecipes();
     console.log("test");
@@ -137,16 +134,6 @@ recipeList.addEventListener("click", function (event) {
     singleRecipeDsp(id);
   }
 });
-
-// clickNo.addEventListener("click", function (event) {
-//   var listItem = event.target.closest("li");
-//      listItem.remove();
-//      localStorage.removeItem("");
-//       var singleRecipe = JSON.parse(localStorage.getItem("")) || {};
-//       delete singleRecipe[];
-// });
-
-//-------------------------------------------------------------------
 
 async function init() {
   renderHealthLabels();
