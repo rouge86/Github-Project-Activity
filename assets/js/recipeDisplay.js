@@ -32,6 +32,21 @@ function realrecipeDsp() {
   });
 }
 
+function findImgUrl(images) {
+  var imgSource = Object.entries(images);
+  var imgURL;
+  var propertyArry = ["REGULAR", "LARGE", "SMALL"];
+  for (var i = 0; i < propertyArry.length; i++) {
+    imgURL = imgSource.find(function (arryItem) {
+      return arryItem[0] === "REGULAR";
+    });
+    if (imgURL) {
+      return imgURL[1].url;
+    }
+  }
+  return "";
+}
+
 export function singleRecipeDsp(recipeID) {
   var recipe = loadRecipe(recipeID);
 
@@ -42,7 +57,8 @@ export function singleRecipeDsp(recipeID) {
 
   renderIngredients(recipe.ingredientLines, recipeIngredientList);
 
-  recipeImage.src = recipe.images.LARGE.url;
+  var imageSource = findImgUrl(recipe.images);
+  recipeImage.src = imageSource;
   RTitle.textContent = recipe.label;
   recipeLink.href = recipe.url;
 
