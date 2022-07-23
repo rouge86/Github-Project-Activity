@@ -3,6 +3,7 @@ import recipeCard from "./render-swipe-card.js";
 import Swipe from "./Swipe.js";
 import realCreate from "./healthLables.js";
 import realrecipeDsp from "./recipeDisplay.js";
+import navigate from "./navigate.js";
 import { handleCardDisplay, bringForward } from "./handle-card-display.js";
 
 const query = new RecipeQuery();
@@ -17,7 +18,6 @@ const recipeCon = document.getElementById("recipesContainer");
 var recipeArry = JSON.parse(localStorage.getItem("recipes")) || [];
 
 const nav = document.querySelector("nav");
-const mainCollection = document.querySelectorAll("main");
 const labelContainer = document.getElementById("labelSection");
 const recipeCardContainer = document.getElementById("cards");
 const cards = document.getElementById("cards");
@@ -34,10 +34,7 @@ labelCon.addEventListener("input", function (event) {
 nav.addEventListener("click", event => {
   if (!event.target.matches("button")) return;
   const location = event.target.dataset.value;
-  Array.from(mainCollection).forEach(mainEl => {
-    mainEl.hidden = true;
-  });
-  document.getElementById(location).hidden = false;
+  navigate(location);
 });
 recipeCardContainer.addEventListener("pointerdown", grabCard);
 recipeCardContainer.addEventListener("click", onCardClick);
