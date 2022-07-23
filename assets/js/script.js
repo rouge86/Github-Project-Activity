@@ -2,7 +2,10 @@ import RecipeQuery from "./RecipeQuery.js";
 import recipeCard from "./render-swipe-card.js";
 import Swipe from "./Swipe.js";
 import realCreate from "./healthLables.js";
-import realrecipeDsp, { singleRecipeDsp } from "./recipeDisplay.js";
+import realrecipeDsp, {
+  singleRecipeDsp,
+  singleRecipeDelete,
+} from "./recipeDisplay.js";
 import navigate from "./navigate.js";
 import { handleCardDisplay, bringForward } from "./handle-card-display.js";
 
@@ -15,7 +18,6 @@ const labelCon = document.getElementById("labelSection");
 var labelArry = Object.values(RecipeQuery.healthLabels);
 
 const recipeCon = document.getElementById("recipesContainer");
-var recipeArry = JSON.parse(localStorage.getItem("recipes")) || [];
 
 const nav = document.querySelector("nav");
 const labelContainer = document.getElementById("labelSection");
@@ -34,6 +36,7 @@ labelCon.addEventListener("input", function (event) {
 nav.addEventListener("click", (event) => {
   if (!event.target.matches("button")) return;
   const location = event.target.dataset.value;
+  renderRecipes();
   navigate(location);
 });
 recipeCardContainer.addEventListener("pointerdown", grabCard);
@@ -107,27 +110,49 @@ function renderHealthLabels() {
   for (var i = 0; i < labelElemAry.length; i++) {
     labelContainer.appendChild(labelElemAry[i]);
   }
+}
 
-  var recipeElemAry = realrecipeDsp(recipeArry);
+function renderRecipes() {
+  recipeCon.innerHTML = "";
+  var recipeElemAry = realrecipeDsp();
   for (var i = 0; i < recipeElemAry.length; i++) {
     recipeCon.appendChild(recipeElemAry[i]);
   }
 }
 
+//-------------------------------------------------------------------
 var recipeList = document.getElementById("recipesContainer");
+
 recipeList.addEventListener("click", function (event) {
+  //var deleteBtn = recipeList.getElementsByTagName("button");
   var listItem = event.target.closest("li");
-  // //if (event.target.matches("li")) {
-  console.log(listItem);
   var id = listItem.id;
-  singleRecipeDsp(id);
-  // //}
+  //console.log(listItem);
+  if (event.target.matches("button")) {
+    //delete button check
+    singleRecipeDelete(id);
+    renderRecipes();
+    console.log("test");
+  } else {
+    singleRecipeDsp(id);
+  }
 });
+
+// clickNo.addEventListener("click", function (event) {
+//   var listItem = event.target.closest("li");
+//      listItem.remove();
+//      localStorage.removeItem("");
+//       var singleRecipe = JSON.parse(localStorage.getItem("")) || {};
+//       delete singleRecipe[];
+// });
+
+//-------------------------------------------------------------------
 
 async function init() {
   renderHealthLabels();
   await drawCards(5);
   bringForward(cards.lastChild);
+  renderRecipes();
 }
 
 init();
