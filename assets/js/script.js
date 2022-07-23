@@ -25,7 +25,6 @@ const recipeCardContainer = document.getElementById("cards");
 const cards = document.getElementById("cards");
 
 labelCon.addEventListener("input", function (event) {
-  console.log(event.target.value);
   if (event.target.checked) {
     onLabelSave(event.target.value);
   } else {
@@ -54,7 +53,6 @@ function handleDecision(card, accepted) {
 function onLabelSave(healthLabel) {
   var labelObject = JSON.parse(localStorage.getItem("healthLabel")) || {};
   labelObject[healthLabel] = true;
-  console.log(labelObject);
   localStorage.setItem("healthLabel", JSON.stringify(labelObject));
 }
 
@@ -129,7 +127,6 @@ recipeList.addEventListener("click", function (event) {
   if (event.target.matches("button")) {
     singleRecipeDelete(id);
     renderRecipes();
-    console.log("test");
   } else {
     singleRecipeDsp(id);
   }
