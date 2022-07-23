@@ -6,7 +6,7 @@ import realrecipeDsp, {
   singleRecipeDsp,
   singleRecipeDelete,
 } from "./recipeDisplay.js";
-import navigate from "./navigate.js";
+import navigate, { setHighlight } from "./navigate.js";
 import { handleCardDisplay, bringForward } from "./handle-card-display.js";
 
 const query = new RecipeQuery();
@@ -134,6 +134,7 @@ recipeList.addEventListener("click", function (event) {
 
 async function init() {
   renderHealthLabels();
+  setHighlight();
   await drawCards(5);
   bringForward(cards.lastChild);
   renderRecipes();

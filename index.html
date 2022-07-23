@@ -14,7 +14,7 @@
     <link rel="icon" href="./assets/images/heart.png" />
   </head>
   <body>
-    <div class="grid grid-rows-1 h-screen bg-red-50">
+    <div class="grid grid-rows-1 h-screen bg-red-50 w-screen">
       <div class="flex h-full">
         <main id="mainScreen" class="flex-col flex-1 h-full">
           <div class="flex flex-col h-full">
@@ -122,32 +122,36 @@
         </main>
       </div>
       <nav
-        class="flex flex-none h-auto bg-red-100 border-t-4 border-solid border-red-300 justify-center gap-3 p-3"
+        class="flex w-full flex-none h-auto bg-red-100 border-t-4 border-solid border-red-300 justify-center p-3"
       >
-        <button
-          data-value="mainScreen"
-          class="w-28 p-3 bg-purple-600 rounded-md text-white"
+        <div
+          class="grid grid-flow-col grid-cols-4 gap-3 w-full max-w-2xl justify-center"
         >
-          Home
-        </button>
-        <button
-          data-value="optionsScreen"
-          class="w-28 p-3 bg-red-300 rounded-md text-black font-bold"
-        >
-          Options
-        </button>
-        <button
-          data-value="mapScreen"
-          class="w-28 p-3 bg-red-300 rounded-md text-black font-bold"
-        >
-          Maps
-        </button>
-        <button
-          data-value="recipesScreen"
-          class="w-28 p-3 bg-red-300 rounded-md text-black font-bold"
-        >
-          Recipes
-        </button>
+          <button
+            data-value="mainScreen"
+            class="p-3 bg-red-300 rounded-md font-bold transition-colors text-sm sm:text-lg"
+          >
+            Home
+          </button>
+          <button
+            data-value="optionsScreen"
+            class="p-3 bg-red-300 rounded-md font-bold transition-colors text-sm sm:text-lg"
+          >
+            Options
+          </button>
+          <button
+            data-value="mapScreen"
+            class="p-3 bg-red-300 rounded-md font-bold transition-colors text-sm sm:text-lg"
+          >
+            Maps
+          </button>
+          <button
+            data-value="recipesScreen"
+            class="p-3 bg-red-300 rounded-md font-bold transition-colors text-sm sm:text-lg"
+          >
+            Recipes
+          </button>
+        </div>
       </nav>
     </div>
     <script src="./assets/js/script.js" type="module"></script>
