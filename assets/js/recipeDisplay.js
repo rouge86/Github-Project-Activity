@@ -8,14 +8,18 @@ function recipeDsp(recipeList) {
   listOfRecipe.appendChild(title);
   listOfRecipe.appendChild(clear);
 
-  listOfRecipe.setAttribute("class", "w-48 flex flex-none justify-between");
+  listOfRecipe.setAttribute("class", "flex flex-none justify-between gap-2");
   listOfRecipe.setAttribute("id", recipeList.uri);
   clear.setAttribute(
     "class",
-    "border-solid border-2 border-rose-500 hover:bg-rose-400 animate-bounc"
+    "flex-none border-solid border-2 border-rose-500 hover:bg-rose-400 rounded h-7 w-7 my-1 hover:text-white transition-all"
   );
 
   title.innerText = recipeList.label;
+  title.setAttribute(
+    "class",
+    "overflow-hidden text-ellipsis p-1 whitespace-nowrap hover:bg-blue-100 flex-1 rounded"
+  );
   clear.innerText = "✘";
 
   return listOfRecipe;
