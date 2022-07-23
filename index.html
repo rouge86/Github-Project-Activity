@@ -59,9 +59,11 @@
             >
               Recipes
             </h2>
-            <ul id="recipesContainer" class="container">
-              <!-- Render list items with javascript, load data from local storage -->
-            </ul>
+            <div class="">
+              <ul id="recipesContainer" class="container overflow-y-scroll">
+                <!-- Render list items with javascript, load data from local storage -->
+              </ul>
+            </div>
           </section>
         </main>
         <main id="recipeScreen" class="flex-1 bg-red-50" hidden>
@@ -81,10 +83,10 @@
                 src="https://source.unsplash.com/random"
                 alt="placeholder"
               />
-              <h3 class="text-5xl font-bold">(Recipe title)</h3>
+              <h3 id="RTitle" class="text-5xl font-bold">(Recipe title)</h3>
               <ul id="recipeIngredientList">
-                <li>Recipe Ingredient #1</li>
-                <li>Recipe Ingredient #2 etc</li>
+                <!-- <li>Recipe Ingredient #1</li>
+                <li>Recipe Ingredient #2 etc</li> -->
               </ul>
               <p>
                 See the full recipe article:
