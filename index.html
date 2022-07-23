@@ -78,31 +78,44 @@
           </section>
         </main>
         <main id="recipeScreen" class="flex-1 bg-red-50" hidden>
-          <section class="relative h-full">
+          <section class="grid grid-rows-[min-content_minmax(0,_1fr)] h-full">
             <h2
               class="text-7xl text-red-500 font-bold text-center border-b-4 border-solid border-red-300 bg-red-100 p-5"
               id="recipeTitle"
             >
               Recipe
             </h2>
-            <div
-              class="absolute text-center bg-white border-gray-600 border-2 rounded-3xl w-80 h-96 overflow-hidden shadow-2xl left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
-            >
-              <img
-                class="h-1/2 w-full object-cover select-none pointer-events-none"
-                id="recipeImage"
-                src="https://source.unsplash.com/random"
-                alt="placeholder"
-              />
-              <h3 id="RTitle" class="text-5xl font-bold">(Recipe title)</h3>
-              <ul id="recipeIngredientList">
-                <!-- <li>Recipe Ingredient #1</li>
+            <div class="flex justify-center align-middle h-full">
+              <div
+                class="h-full overflow-y-auto max-w-[600px] bg-white border-2"
+              >
+                <img
+                  class="h-1/2 w-full object-cover select-none pointer-events-none"
+                  id="recipeImage"
+                  src="https://source.unsplash.com/random"
+                  alt="placeholder"
+                />
+                <div class="p-5">
+                  <h3 id="RTitle" class="text-3xl font-bold mb-3">
+                    (Recipe title)
+                  </h3>
+                  <p
+                    class="border-b-2 whitespace-nowrap overflow-hidden text-ellipsis mb-3"
+                  >
+                    See the full recipe article:
+                    <a
+                      class="text-blue-600"
+                      id="recipeLink"
+                      href="link to original recipe site"
+                      >Link</a
+                    >
+                  </p>
+                  <ul id="recipeIngredientList">
+                    <!-- <li>Recipe Ingredient #1</li>
                 <li>Recipe Ingredient #2 etc</li> -->
-              </ul>
-              <p>
-                See the full recipe article:
-                <a id="recipeLink" href="link to original recipe site">Link</a>
-              </p>
+                  </ul>
+                </div>
+              </div>
             </div>
           </section>
         </main>

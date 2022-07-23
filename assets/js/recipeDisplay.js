@@ -61,6 +61,7 @@ export function singleRecipeDsp(recipeID) {
   recipeImage.src = imageSource;
   RTitle.textContent = recipe.label;
   recipeLink.href = recipe.url;
+  recipeLink.innerHTML = recipe.url;
 
   navigate("recipeScreen");
 }
