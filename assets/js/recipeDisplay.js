@@ -25,13 +25,12 @@ function recipeDsp(recipeList) {
   return listOfRecipe;
 }
 
-function realrecipeDsp(recipeArry) {
+function realrecipeDsp() {
+  var recipeArry = JSON.parse(localStorage.getItem("recipes")) || [];
   return recipeArry.map((recipeLabel) => {
     return recipeDsp(recipeLabel);
   });
 }
-
-//--------------------------------------------------------------------------
 
 export function singleRecipeDsp(recipeID) {
   var recipe = loadRecipe(recipeID);
@@ -48,6 +47,15 @@ export function singleRecipeDsp(recipeID) {
   recipeLink.href = recipe.url;
 
   navigate("recipeScreen");
+}
+
+export function singleRecipeDelete(recipeID) {
+  const recipes = JSON.parse(localStorage.getItem("recipes")) || [];
+  var filteredRecipes = recipes.filter(function (recipe) {
+    return recipeID !== recipe.uri;
+  });
+
+  localStorage.setItem("recipes", JSON.stringify(filteredRecipes));
 }
 
 function renderIngredients(ingredientArry, container) {
