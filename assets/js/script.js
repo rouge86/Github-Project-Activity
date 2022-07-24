@@ -6,13 +6,15 @@ import realrecipeDsp, {
   singleRecipeDsp,
   singleRecipeDelete,
 } from "./recipeDisplay.js";
-import navigate from "./navigate.js";
+import navigate, { setHighlight } from "./navigate.js";
 import { handleCardDisplay, bringForward } from "./handle-card-display.js";
 
+const CARD_DRAW = 7;
 const query = new RecipeQuery();
 let swipe;
 const labelArray = Object.values(RecipeQuery.healthLabels);
 let isSwiping = false;
+let isRedrawRequired = false;
 
 const labelCon = document.getElementById("labelSection");
 var labelArry = Object.values(RecipeQuery.healthLabels);
@@ -24,16 +26,25 @@ const labelContainer = document.getElementById("labelSection");
 const recipeCardContainer = document.getElementById("cards");
 const cards = document.getElementById("cards");
 
-labelCon.addEventListener("input", function (event) {
+labelCon.addEventListener("input", async function (event) {
   if (event.target.checked) {
     onLabelSave(event.target.value);
   } else {
     onLabelDelete(event.target.value);
   }
+  setHealthOptions();
+  isRedrawRequired = true;
 });
 
-nav.addEventListener("click", (event) => {
+function setHealthOptions() {
+  const healthOptions = JSON.parse(localStorage.getItem("healthLabel")) || {};
+  query.setHealthLabels(Object.keys(healthOptions));
+  isRedrawRequired = true;
+}
+
+nav.addEventListener("click", async (event) => {
   if (!event.target.matches("button")) return;
+  if (isRedrawRequired) redrawCards();
   const location = event.target.dataset.value;
   renderRecipes();
   navigate(location);
@@ -48,6 +59,14 @@ function handleDecision(card, accepted) {
   if (accepted) saveRecipe(card.dataset.id);
   handleCardDisplay(card, accepted, () => (isSwiping = false));
   drawCards(1);
+}
+
+async function redrawCards() {
+  isRedrawRequired = false;
+  dropCards();
+  await query.requery();
+  await drawCards(CARD_DRAW);
+  bringForward(cards.lastChild);
 }
 
 function onLabelSave(healthLabel) {
@@ -89,6 +108,10 @@ function grabCard(e) {
   const card = e.target.closest(".recipeCard");
   if (!card) return;
   swipe = new Swipe(e, card, handleDecision);
+}
+
+function dropCards() {
+  cards.innerHTML = "";
 }
 
 async function drawCards(numberOfCards) {
@@ -134,7 +157,9 @@ recipeList.addEventListener("click", function (event) {
 
 async function init() {
   renderHealthLabels();
-  await drawCards(5);
+  setHighlight();
+  setHealthOptions();
+  await drawCards(CARD_DRAW);
   bringForward(cards.lastChild);
   renderRecipes();
 }

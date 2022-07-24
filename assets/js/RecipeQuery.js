@@ -132,6 +132,12 @@ class RecipeQuery {
     }
   }
 
+  async requery() {
+    this.#recipes.length = 0;
+    this.#activeRecipes.length = 0;
+    await this.#getRecipes();
+  }
+
   mainCourseMode() {
     const { mainCourse } = RecipeQuery.modeType;
     this.#mode = mainCourse;
@@ -384,6 +390,10 @@ class RecipeQuery {
     console.log("Cuisine Types:", this.#cuisineTypes);
     console.log("Health Labels:", this.#health);
     console.log(this.#buildUrl().href);
+    console.log(
+      "Recipes",
+      this.#recipes.map(recipe => recipe.label)
+    );
   }
   #uniqueArray(arr) {
     return [...new Set(arr)];

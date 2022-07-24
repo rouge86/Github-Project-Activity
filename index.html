@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Food Tinder</title>
+    <title>Nibbles</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script src="https://cdn.tailwindcss.com"></script>
@@ -11,33 +11,36 @@
       crossorigin="anonymous"
     ></script>
     <link rel="stylesheet" type="text/css" href="./assets/css/style.css" />
+    <link rel="icon" href="./assets/images/heart.png" />
   </head>
   <body>
-    <div class="grid grid-rows-1 h-screen bg-red-50">
-      <div class="flex h-full">
-        <main id="mainScreen" class="flex-col flex-1 h-full">
-          <div class="flex flex-col h-full">
+    <div class="grid grid-rows-1 h-screen bg-red-50 w-screen">
+      <div class="h-full w-full overflow-hidden">
+        <main id="mainScreen" class="h-full w-full">
+          <section
+            class="grid grid-rows-[min-content_minmax(0,_1fr)] h-full w-full"
+          >
             <header
               class="flex-none bg-red-100 border-b-4 border-solid border-red-300 p-5"
             >
               <h1
-                class="flex-none h-fit text-7xl font-bold text-center text-red-500"
+                class="flex-none h-fit text-6xl font-bold text-center text-red-500"
               >
                 Nibbles <i class="fa fa-heart" style="color: #ef4444"></i>
               </h1>
             </header>
-            <section class="flex relative h-full recipeCards">
+            <section class="flex relative h-full w-full p-5 recipeCards">
               <div
                 id="cards"
-                class="h-[350px] w-[280px] justify-centert m-auto recipeCardFrame relative"
+                class="h-full max-w-[90%] justify-center m-auto recipeCardFrame relative"
               ></div>
             </section>
-          </div>
+          </section>
         </main>
-        <main id="optionsScreen" class="flex-1 h-full" hidden>
+        <main id="optionsScreen" class="h-full w-full" hidden>
           <section class="grid grid-rows-[min-content_minmax(0,_1fr)] h-full">
             <h2
-              class="text-7xl text-red-500 font-bold text-center border-b-4 border-solid border-red-300 bg-red-100 p-5 h-fit"
+              class="text-3xl md:text-6xl text-red-500 font-bold text-center border-b-4 border-solid border-red-300 bg-red-100 p-5 h-fit"
             >
               Health Options
             </h2>
@@ -49,7 +52,7 @@
             </div>
           </section>
         </main>
-        <main id="mapScreen" class="flex-1" hidden>
+        <main id="mapScreen" class="h-full w-full" hidden>
           <div class="flex flex-1 flex-col h-full">
             <section id="panel"></section>
             <section id="map"></section>
@@ -57,13 +60,13 @@
             <button></button>
           </div>
         </main>
-        <main id="recipesScreen" class="flex-1" hidden>
+        <main id="recipesScreen" class="h-full w-full" hidden>
           <section
             id="RecipeSec"
             class="grid grid-rows-[min-content_minmax(0,_1fr)] h-full"
           >
             <h2
-              class="text-7xl text-red-500 font-bold text-center border-b-4 border-solid border-red-300 bg-red-100 p-5"
+              class="text-3xl md:text-6xl text-red-500 font-bold text-center border-b-4 border-solid border-red-300 bg-red-100 p-5"
             >
               Recipes
             </h2>
@@ -71,49 +74,53 @@
               <ul
                 id="recipesContainer"
                 class="container w-80 self-center h-full rounded border-solid border-4 border-gray-500 overflow-y-auto bg-white p-2"
-              >
-                <!-- Render list items with javascript, load data from local storage -->
-              </ul>
+              ></ul>
             </div>
           </section>
         </main>
-        <main id="recipeScreen" class="flex-1 bg-red-50" hidden>
-          <section class="grid grid-rows-[min-content_minmax(0,_1fr)] h-full">
+        <main id="recipeScreen" class="h-full w-full" hidden>
+          <section
+            class="grid grid-rows-[min-content_minmax(0,_1fr)] grid-cols-1 h-full w-full"
+          >
             <h2
-              class="text-7xl text-red-500 font-bold text-center border-b-4 border-solid border-red-300 bg-red-100 p-5"
+              class="text-3xl md:text-6xl text-red-500 font-bold text-center border-b-4 border-solid border-red-300 bg-red-100 p-5"
               id="recipeTitle"
             >
               Recipe
             </h2>
-            <div class="flex justify-center align-middle h-full">
+            <div class="h-full w-full">
               <div
-                class="h-full overflow-y-auto max-w-[600px] bg-white border-2"
+                id="recipeContent"
+                class="h-full w-full max-w-[600px] mx-auto overflow-y-auto bg-white border-x-2 border-x-red-100"
               >
-                <img
-                  class="h-1/2 w-full object-cover select-none pointer-events-none"
-                  id="recipeImage"
-                  src="https://source.unsplash.com/random"
-                  alt="placeholder"
-                />
-                <div class="p-5">
-                  <h3 id="RTitle" class="text-3xl font-bold mb-3">
-                    (Recipe title)
-                  </h3>
-                  <p
-                    class="border-b-2 whitespace-nowrap overflow-hidden text-ellipsis mb-3"
-                  >
-                    See the full recipe article:
+                <div class="h-1/2 w-full select-none pointer-events-none">
+                  <img
+                    id="recipeImage"
+                    class="w-full h-full object-cover"
+                    src="https://source.unsplash.com/random"
+                    alt="placeholder"
+                  />
+                </div>
+                <div class="p-5 w-full">
+                  <h3 id="RTitle" class="text-3xl font-bold mb-3 w-full"></h3>
+                  <p class="border-b-2 w-full">See the full recipe article:</p>
+                  <div class="w-full">
                     <a
-                      class="text-blue-600"
+                      class="text-blue-600 w-full inline-block text-ellipsis overflow-hidden"
                       id="recipeLink"
-                      href="link to original recipe site"
-                      >Link</a
-                    >
-                  </p>
-                  <ul id="recipeIngredientList">
-                    <!-- <li>Recipe Ingredient #1</li>
-                <li>Recipe Ingredient #2 etc</li> -->
-                  </ul>
+                      href="#"
+                    ></a>
+                  </div>
+                  <h3 id="healthAlertTitle" class="text-xl" hidden>
+                    This recipe does not support the health concerns you have
+                    listed:
+                  </h3>
+                  <ul
+                    id="healthAlerts"
+                    class="bg-red-500 border-slate-700 border-2 p-2 rounded-md text-white list-disc list-inside capitalize font-bold"
+                    hidden
+                  ></ul>
+                  <ul id="recipeIngredientList"></ul>
                 </div>
               </div>
             </div>
@@ -121,32 +128,36 @@
         </main>
       </div>
       <nav
-        class="flex flex-none h-auto bg-red-100 border-t-4 border-solid border-red-300 justify-center gap-3 p-3"
+        class="flex w-full flex-none h-auto bg-red-100 border-t-4 border-solid border-red-300 justify-center p-3"
       >
-        <button
-          data-value="mainScreen"
-          class="w-28 p-3 bg-purple-600 rounded-md text-white"
+        <div
+          class="grid grid-flow-col grid-cols-4 gap-3 w-full max-w-2xl justify-center"
         >
-          Home
-        </button>
-        <button
-          data-value="optionsScreen"
-          class="w-28 p-3 bg-red-300 rounded-md text-black font-bold"
-        >
-          Options
-        </button>
-        <button
-          data-value="mapScreen"
-          class="w-28 p-3 bg-red-300 rounded-md text-black font-bold"
-        >
-          Maps
-        </button>
-        <button
-          data-value="recipesScreen"
-          class="w-28 p-3 bg-red-300 rounded-md text-black font-bold"
-        >
-          Recipes
-        </button>
+          <button
+            data-value="mainScreen"
+            class="p-3 bg-red-300 rounded-md font-bold transition-colors text-sm sm:text-lg"
+          >
+            Home
+          </button>
+          <button
+            data-value="optionsScreen"
+            class="p-3 bg-red-300 rounded-md font-bold transition-colors text-sm sm:text-lg"
+          >
+            Options
+          </button>
+          <button
+            data-value="mapScreen"
+            class="p-3 bg-red-300 rounded-md font-bold transition-colors text-sm sm:text-lg"
+          >
+            Maps
+          </button>
+          <button
+            data-value="recipesScreen"
+            class="p-3 bg-red-300 rounded-md font-bold transition-colors text-sm sm:text-lg"
+          >
+            Recipes
+          </button>
+        </div>
       </nav>
     </div>
     <script src="./assets/js/script.js" type="module"></script>
