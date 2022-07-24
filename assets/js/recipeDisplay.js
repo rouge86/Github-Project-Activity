@@ -76,6 +76,7 @@ export function singleRecipeDelete(recipeID) {
 }
 
 function renderIngredients(ingredientArry, container) {
+  container.innerHTML = "";
   ingredientArry.forEach((ingredient) => {
     var signleIngredient = document.createElement("li");
     signleIngredient.innerText = ingredient;
