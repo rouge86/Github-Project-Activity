@@ -1,5 +1,6 @@
 const mainCollection = document.querySelectorAll("main");
 const recipeContent = document.getElementById("recipeContent");
+
 export function setHighlight() {
   const buttons = document.querySelectorAll("nav button");
   Array.from(buttons).forEach((button) => {
@@ -11,6 +12,8 @@ export function setHighlight() {
   const id = document.querySelector("main:not([hidden])")?.id;
   const selectedBtn = document.querySelector(`nav button[data-value="${id}"]`);
   if (!selectedBtn) return;
+  selectedBtn.classList.remove("bg-red-300");
+  selectedBtn.classList.remove("text-black");
   selectedBtn.classList.add("bg-red-500");
   selectedBtn.classList.add("text-white");
 }
