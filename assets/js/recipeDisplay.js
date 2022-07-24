@@ -49,12 +49,12 @@ function findImgUrl(images) {
 
 export function singleRecipeDsp(recipeID) {
   var recipe = loadRecipe(recipeID);
-
   var recipeImage = document.getElementById("recipeImage");
   var RTitle = document.getElementById("RTitle");
   var recipeIngredientList = document.getElementById("recipeIngredientList");
   var recipeLink = document.getElementById("recipeLink");
-
+  var healthWarningContainer = document.getElementById("healthAlerts");
+  renderHealthLabels(recipe.healthLabels, healthWarningContainer);
   renderIngredients(recipe.ingredientLines, recipeIngredientList);
 
   var imageSource = findImgUrl(recipe.images);
@@ -73,6 +73,28 @@ export function singleRecipeDelete(recipeID) {
   });
 
   localStorage.setItem("recipes", JSON.stringify(filteredRecipes));
+}
+
+function renderHealthLabels(healthLabelsInRecipe, container) {
+  const healthAlertTitle = document.getElementById("healthAlertTitle");
+  healthAlertTitle.hidden = true;
+  container.hidden = true;
+  const userHealthLabels =
+    JSON.parse(localStorage.getItem("healthLabel")) || {};
+  container.innerHTML = "";
+  Object.keys(userHealthLabels).forEach((userLabel) => {
+    if (
+      healthLabelsInRecipe.some(
+        (recipeLabel) => recipeLabel.toLowerCase() === userLabel.toLowerCase()
+      )
+    )
+      return;
+    healthAlertTitle.hidden = false;
+    container.hidden = false;
+    const label = document.createElement("li");
+    label.innerText = userLabel.replace("-", " ");
+    container.appendChild(label);
+  });
 }
 
 function renderIngredients(ingredientArry, container) {
