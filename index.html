@@ -15,19 +15,21 @@
   </head>
   <body>
     <div class="grid grid-rows-1 h-screen bg-red-50 w-screen">
-      <div class="flex h-full w-full">
-        <main id="mainScreen" class="flex-col flex-1 h-full">
-          <section class="grid grid-rows-[min-content_minmax(0,_1fr)] h-full">
+      <div class="h-full w-full overflow-hidden">
+        <main id="mainScreen" class="h-full w-full" hidden>
+          <section
+            class="grid grid-rows-[min-content_minmax(0,_1fr)] h-full w-full"
+          >
             <header
               class="flex-none bg-red-100 border-b-4 border-solid border-red-300 p-5"
             >
               <h1
-                class="flex-none h-fit text-7xl font-bold text-center text-red-500"
+                class="flex-none h-fit text-6xl font-bold text-center text-red-500"
               >
                 Nibbles <i class="fa fa-heart" style="color: #ef4444"></i>
               </h1>
             </header>
-            <section class="flex relative h-full p-5 recipeCards">
+            <section class="flex relative h-full w-full p-5 recipeCards">
               <div
                 id="cards"
                 class="h-full max-w-[90%] justify-center m-auto recipeCardFrame relative"
@@ -35,10 +37,10 @@
             </section>
           </section>
         </main>
-        <main id="optionsScreen" class="flex-1 h-full" hidden>
+        <main id="optionsScreen" class="h-full w-full" hidden>
           <section class="grid grid-rows-[min-content_minmax(0,_1fr)] h-full">
             <h2
-              class="text-7xl text-red-500 font-bold text-center border-b-4 border-solid border-red-300 bg-red-100 p-5 h-fit"
+              class="text-3xl md:text-6xl text-red-500 font-bold text-center border-b-4 border-solid border-red-300 bg-red-100 p-5 h-fit"
             >
               Health Options
             </h2>
@@ -50,7 +52,7 @@
             </div>
           </section>
         </main>
-        <main id="mapScreen" class="flex-1" hidden>
+        <main id="mapScreen" class="h-full w-full" hidden>
           <div class="flex flex-1 flex-col h-full">
             <section id="panel"></section>
             <section id="map"></section>
@@ -58,13 +60,13 @@
             <button></button>
           </div>
         </main>
-        <main id="recipesScreen" class="flex-1" hidden>
+        <main id="recipesScreen" class="h-full w-full" hidden>
           <section
             id="RecipeSec"
             class="grid grid-rows-[min-content_minmax(0,_1fr)] h-full"
           >
             <h2
-              class="text-7xl text-red-500 font-bold text-center border-b-4 border-solid border-red-300 bg-red-100 p-5"
+              class="text-3xl md:text-6xl text-red-500 font-bold text-center border-b-4 border-solid border-red-300 bg-red-100 p-5"
             >
               Recipes
             </h2>
@@ -76,19 +78,20 @@
             </div>
           </section>
         </main>
-        <main id="recipeScreen" class="flex-1 w-full" hidden>
+        <main id="recipeScreen" class="h-full w-full">
           <section
-            class="grid grid-rows-[min-content_minmax(0,_1fr)] h-full w-full"
+            class="grid grid-rows-[min-content_minmax(0,_1fr)] grid-cols-1 h-full w-full"
           >
             <h2
-              class="text-7xl text-red-500 font-bold text-center border-b-4 border-solid border-red-300 bg-red-100 p-5"
+              class="text-3xl md:text-6xl text-red-500 font-bold text-center border-b-4 border-solid border-red-300 bg-red-100 p-5"
               id="recipeTitle"
             >
               Recipe
             </h2>
-            <div class="flex justify-center align-middle h-full w-full">
+            <div class="h-full w-full">
               <div
-                class="h-full w-full overflow-y-auto max-w-[600px] bg-white border-x-2 border-x-red-100"
+                id="recipeContent"
+                class="h-full w-full max-w-[600px] mx-auto overflow-y-auto bg-white border-x-2 border-x-red-100"
               >
                 <div class="h-1/2 w-full select-none pointer-events-none">
                   <img
@@ -99,19 +102,18 @@
                   />
                 </div>
                 <div class="p-5 w-full">
-                  <h3 id="RTitle" class="text-3xl font-bold mb-3">
+                  <h3 id="RTitle" class="text-3xl font-bold mb-3 w-full">
                     (Recipe title)
                   </h3>
                   <p class="border-b-2 w-full">See the full recipe article:</p>
-                  <p class="w-full overflow-hidden">
+                  <div class="w-full">
                     <a
-                      class="text-blue-600 w-full overflow-hidden text-ellipsis mb-3 block"
+                      class="text-blue-600 w-full inline-block text-ellipsis overflow-hidden"
                       id="recipeLink"
                       href="link to original recipe site"
-                      >Lorem ipsum dolor sit Lorem ipsum dolor sit
-                      amet.;lsdk;lskdjfg;lkj</a
+                      >https://www.website.com</a
                     >
-                  </p>
+                  </div>
                   <ul id="recipeIngredientList">
                     <li>1 tub of eggs</li>
                     <li>2 yoghurts</li>

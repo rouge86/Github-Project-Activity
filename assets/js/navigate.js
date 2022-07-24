@@ -1,5 +1,5 @@
 const mainCollection = document.querySelectorAll("main");
-
+const recipeContent = document.getElementById("recipeContent");
 export function setHighlight() {
   const buttons = document.querySelectorAll("nav button");
   Array.from(buttons).forEach((button) => {
@@ -16,6 +16,7 @@ export function setHighlight() {
 }
 
 function navigate(location) {
+  recipeContent.scrollTo(0, 0);
   Array.from(mainCollection).forEach((mainEl) => {
     mainEl.hidden = true;
   });
