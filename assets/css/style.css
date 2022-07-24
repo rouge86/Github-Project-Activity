@@ -1,10 +1,21 @@
-/* Prevent a mobile device from trying to scroll when picking up the recipe card */
+* {
+  box-sizing: border-box;
+}
+
 .recipeCard {
+  /* Prevent a mobile device from trying to scroll when picking up the recipe card */
   touch-action: none;
+  grid-template-rows: minmax(0, 1fr) min-content min-content;
 }
 
 .recipeCardFrame {
   perspective: 1000px;
+  max-height: min(80%, 500px);
+  aspect-ratio: 3 / 4;
+}
+
+.cardGradient {
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.8) 30%, transparent 100%);
 }
 
 img {

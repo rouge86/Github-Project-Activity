@@ -17,7 +17,7 @@
     <div class="grid grid-rows-1 h-screen bg-red-50 w-screen">
       <div class="flex h-full">
         <main id="mainScreen" class="flex-col flex-1 h-full">
-          <div class="flex flex-col h-full">
+          <section class="grid grid-rows-[min-content_minmax(0,_1fr)] h-full">
             <header
               class="flex-none bg-red-100 border-b-4 border-solid border-red-300 p-5"
             >
@@ -27,13 +27,13 @@
                 Nibbles <i class="fa fa-heart" style="color: #ef4444"></i>
               </h1>
             </header>
-            <section class="flex relative h-full recipeCards">
+            <section class="flex relative h-full p-5 recipeCards">
               <div
                 id="cards"
-                class="h-[350px] w-[280px] justify-centert m-auto recipeCardFrame relative"
+                class="h-full max-w-[90%] justify-center m-auto recipeCardFrame relative"
               ></div>
             </section>
-          </div>
+          </section>
         </main>
         <main id="optionsScreen" class="flex-1 h-full" hidden>
           <section class="grid grid-rows-[min-content_minmax(0,_1fr)] h-full">
