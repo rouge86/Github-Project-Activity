@@ -16,7 +16,7 @@
   <body>
     <div class="grid grid-rows-1 h-screen bg-red-50 w-screen">
       <div class="h-full w-full overflow-hidden">
-        <main id="mainScreen" class="h-full w-full">
+        <main id="mainScreen" class="h-full w-full" hidden>
           <section
             class="grid grid-rows-[min-content_minmax(0,_1fr)] h-full w-full"
           >
@@ -52,26 +52,35 @@
             </div>
           </section>
         </main>
-        <main id="mapScreen" class="h-full w-full" hidden>
-          <div class="flex flex-1 flex-col h-full">
-            <section><button id="button"></button>button</section>
-            <section id="panel"></section>
+        <main id="mapScreen" class="h-full w-full">
+          <div
+            id="mapExpandContainer"
+            class="grid grid-rows-[minmax(0,_1fr),_min-content] h-full"
+          >
+            <!-- <section id="panel"></section> -->
             <section id="map" class="w-full h-full bg-gray-400"></section>
-            <input
-              id="searchInput"
-              class="shadow appearance-none border rounded my-1 self-center min-w-[25rem] max-w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline controls"
-              type="text"
-              placeholder="Enter restaurant here"
-            />
-            <!--   <ul
-              class="bg-white self-center p-3 min-w-[25rem] w-fit max-w-full shadow border rounded geo-data"
-            >
-              <li>Full Address <span id="location"></span></li>
-              <li>Phone <span id="phone"></span></li>
-              <li>Hours <span id="hours"></span></li>
-              <li>Rating <span id="rating"></span></li>
-              <li>Website <span id="website"></span></li>
-            </ul> -->
+            <div class="grid grid-rows-[min-content,_minmax(0,_1fr)] gap-1 p-3">
+              <div class="flex gap-2">
+                <input
+                  id="searchInput"
+                  class="shadow appearance-none border rounded self-center min-w-[25rem] max-w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline controls"
+                  type="text"
+                  placeholder="Enter restaurant here"
+                />
+                <button id="mapExpand" class="bg-red-300 h-8 w-8">^</button>
+              </div>
+              <div id="mapDetails" class="h-0 overflow-y-auto">
+                <ul
+                  class="bg-white self-center p-3 min-w-[25rem] w-fit max-w-full shadow border rounded geo-data"
+                >
+                  <li>Full Address <span id="location"></span></li>
+                  <li>Phone <span id="phone"></span></li>
+                  <li>Hours <span id="hours"></span></li>
+                  <li>Rating <span id="rating"></span></li>
+                  <li>Website <span id="website"></span></li>
+                </ul>
+              </div>
+            </div>
           </div>
         </main>
         <main id="recipesScreen" class="h-full w-full" hidden>

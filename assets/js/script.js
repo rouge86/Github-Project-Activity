@@ -8,6 +8,7 @@ import realrecipeDsp, {
 } from "./recipeDisplay.js";
 import navigate, { setHighlight } from "./navigate.js";
 import { handleCardDisplay, bringForward } from "./handle-card-display.js";
+import toggleMapExpand from "./toggle-map-expand.js";
 
 const CARD_DRAW = 7;
 const query = new RecipeQuery();
@@ -15,23 +16,22 @@ let swipe;
 const labelArray = Object.values(RecipeQuery.healthLabels);
 let isSwiping = false;
 let isRedrawRequired = false;
+let isMapExpanded = true;
 
 const labelCon = document.getElementById("labelSection");
 var labelArry = Object.values(RecipeQuery.healthLabels);
 
 const recipeCon = document.getElementById("recipesContainer");
-
 const nav = document.querySelector("nav");
 const labelContainer = document.getElementById("labelSection");
 const recipeCardContainer = document.getElementById("cards");
 const cards = document.getElementById("cards");
-/* let pos;
-let map;
-let bounds;
-let infoWindow;
-let currentInfoWindow;
-let service;
-let infoPane; */
+const mapExpandBtn = document.getElementById("mapExpand");
+
+mapExpandBtn.addEventListener("click", function (e) {
+  toggleMapExpand(!isMapExpanded);
+  isMapExpanded = !isMapExpanded;
+});
 
 labelCon.addEventListener("input", async function (event) {
   if (event.target.checked) {
@@ -171,7 +171,7 @@ async function init() {
   renderRecipes();
 }
 
-init();
+// init();
 
 // function initMap() {
 //   // Initialize variables
