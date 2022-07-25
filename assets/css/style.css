@@ -126,3 +126,63 @@ li p {
   align-self: center;
   justify-self: left;
 } */
+
+/* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+#map {
+  height: 100%;
+  width: 100%;
+  background-color: grey;
+}
+
+#searchInput {
+  margin: auto;
+  height: 30px;
+  width: 100%;
+}
+/* Optional: Makes the sample page fill the window. */
+
+/* TODO: Step 4A1: Make a generic sidebar */
+/* Styling for an info pane that slides out from the left. 
+       * Hidden by default. */
+#panel {
+  background-color: white;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  z-index: 1;
+  overflow-x: hidden;
+  transition: all 0.2s ease-out;
+}
+
+.open {
+  width: 250px;
+}
+
+/* Styling for place details */
+.hero {
+  width: 100%;
+  height: 100%;
+  max-height: 166px;
+  display: block;
+}
+
+.place,
+p {
+  font-family: "open sans", arial, sans-serif;
+  padding-left: 18px;
+  padding-right: 18px;
+}
+
+.details {
+  color: darkslategrey;
+}
+
+a {
+  text-decoration: none;
+  color: cadetblue;
+}
+
+.pac-container {
+  margin-top: -210px;
+}
