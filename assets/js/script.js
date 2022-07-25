@@ -385,14 +385,14 @@ function initAutocomplete() {
     type: ["restaurant"],
     componentRestrictions: { country: "AU", postalCode: "5000" },
   });
-
   var input = document.getElementById("searchInput");
   const searchBox = new google.maps.places.SearchBox(input);
 
   //map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
   // Bias the SearchBox results towards current map's viewport.
   map.addListener("bounds_changed", () => {
-    searchBox.setBounds(map.getBounds());
+    const bounds = map.getBounds().toJSON();
+    searchBox.setBounds(bounds);
   });
 
   let markers = [];
@@ -400,16 +400,35 @@ function initAutocomplete() {
   // Listen for the event fired when the user selects a prediction and retrieve
   // more details for that place.
   searchBox.addListener("places_changed", () => {
-    const initialPlaces = searchBox.getPlaces();
+    const places = searchBox.getPlaces();
 
-    if (initialPlaces.length == 0) {
+    if (places.length == 0) {
+      fallback();
       return;
     }
+    handlePlaces(places);
+  });
 
-    const places = initialPlaces.sort((a, b) => {
-      return a.rating - b.rating;
-    });
+  function fallback() {
+    const center = map.getCenter();
+    const latLng = new google.maps.LatLng(center);
 
+    const request = {
+      location: latLng.toJSON(),
+      radius: 1000,
+      query: input.value,
+    };
+    const service = new google.maps.places.PlacesService(map);
+    service.textSearch(request, callback);
+  }
+
+  function callback(results, status) {
+    console.log("callback status", status);
+    console.log(results);
+    if (results.length > 0) handlePlaces(results);
+  }
+
+  function handlePlaces(places) {
     // Clear out the old markers.
     markers.forEach((marker) => {
       marker.setMap(null);
@@ -453,7 +472,8 @@ function initAutocomplete() {
       }
     });
     map.fitBounds(bounds);
-  });
+    toggleMapExpand(false);
+  }
 }
 
 window.initAutocomplete = initAutocomplete;

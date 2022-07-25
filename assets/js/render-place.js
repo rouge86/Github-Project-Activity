@@ -4,7 +4,7 @@ function renderPlace(place) {
   const {
     name,
     formatted_address,
-    opening_hours,
+    // opening_hours,
     place_id,
     rating,
     user_ratings_total,
@@ -15,9 +15,9 @@ function renderPlace(place) {
       <p class="font-bold">${name}</p>
       <p>Rating: <span>${rating}</span> ⭐️ out of ${user_ratings_total} ratings</p>
       <p>${formatted_address}</p>
-      <p>${opening_hours.isOpen() ? "Currently open" : "Closed"}</p>
-    </li>
-  `;
+      </li>
+      `;
+  // <p>${opening_hours?.isOpen() ? "Currently open" : "Closed"}</p>
 
   const template = document.createElement("div");
   template.innerHTML = html;
