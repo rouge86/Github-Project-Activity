@@ -11,7 +11,7 @@ Nibbles is a application that allows users to find delicious recipes in a Tinder
 ## Languages
 
 - HTML
-- CSS
+- Tailwind CSS
 - JavaScript
 
 ## API
