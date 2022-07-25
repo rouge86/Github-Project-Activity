@@ -69,16 +69,11 @@
                 />
                 <button id="mapExpand" class="bg-red-300 h-8 w-8">^</button>
               </div>
-              <div id="mapDetails" class="h-0 overflow-y-auto">
+              <div id="mapDetails" class="h-0 overflow-y-auto bg-slate-100">
                 <ul
-                  class="bg-white self-center p-3 min-w-[25rem] w-fit max-w-full shadow border rounded geo-data"
-                >
-                  <li>Full Address <span id="location"></span></li>
-                  <li>Phone <span id="phone"></span></li>
-                  <li>Hours <span id="hours"></span></li>
-                  <li>Rating <span id="rating"></span></li>
-                  <li>Website <span id="website"></span></li>
-                </ul>
+                  id="placesContainer"
+                  class="bg-slate-100 self-center p-3 min-w-[25rem] w-fit max-w-full shadow border rounded geo-data"
+                ></ul>
               </div>
             </div>
           </div>

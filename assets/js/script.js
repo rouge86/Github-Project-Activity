@@ -9,6 +9,7 @@ import realrecipeDsp, {
 import navigate, { setHighlight } from "./navigate.js";
 import { handleCardDisplay, bringForward } from "./handle-card-display.js";
 import toggleMapExpand from "./toggle-map-expand.js";
+import renderPlaces from "./render-place.js";
 
 const CARD_DRAW = 7;
 const query = new RecipeQuery();
@@ -417,6 +418,8 @@ function initAutocomplete() {
 
     // For each place, get the icon, name and location.
     const bounds = new google.maps.LatLngBounds();
+
+    renderPlaces(places);
 
     places.forEach((place) => {
       if (!place.geometry || !place.geometry.location) {

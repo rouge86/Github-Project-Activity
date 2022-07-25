@@ -12,7 +12,10 @@ function toggleMapExpand(expand) {
       "class",
       "grid grid-rows-[15%,_85%] h-full"
     );
-    mapDetailsContainer.setAttribute("class", "overflow-y-auto");
+    mapDetailsContainer.setAttribute(
+      "class",
+      "overflow-y-auto mx-auto max-w-full"
+    );
   }
 }
 
